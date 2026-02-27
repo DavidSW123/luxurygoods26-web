@@ -78,7 +78,8 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, FacebookAuthProvider, OAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        // Volvemos a usar signInWithPopup
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
         import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -103,6 +104,7 @@
         const btnCloseModal = document.getElementById('btn-close-modal');
         const btnLogout = document.getElementById('btn-logout');
 
+        // Abrir y cerrar el modal manualmente
         btnOpenLogin.addEventListener('click', (e) => {
             e.preventDefault();
             loginModal.classList.remove('hidden');
@@ -112,31 +114,26 @@
             loginModal.classList.add('hidden');
         });
 
-        // ESCUCHADOR DE SESIÓN MEJORADO A PRUEBA DE FALLOS
+        // EL PORTERO AUTOMÁTICO
         onAuthStateChanged(auth, async (user) => {
-            console.log("ESTADO DE SESIÓN: ", user ? "Logueado como " + user.email : "Desconectado");
-            
             if (user) {
-                // Forzamos que se cierre el modal sí o sí
+                // 1. Por seguridad extra, ocultamos el modal oscuro aquí también
                 loginModal.classList.add('hidden');
+                
                 menuLogin.classList.add('hidden');
                 menuLogout.classList.remove('hidden');
 
                 try {
-                    // Intentamos ver si eres admin
                     const docRef = doc(db, "usuarios", user.uid);
                     const docSnap = await getDoc(docRef);
                     
                     if (docSnap.exists() && docSnap.data().rol === "admin") {
-                        console.log("¡Permiso de Admin concedido!");
                         menuAdmin.classList.remove('hidden');
                     } else {
-                        console.log("Usuario normal, sin panel de admin.");
                         menuAdmin.classList.add('hidden');
                     }
                 } catch (error) {
-                    // Si la base de datos falla, capturamos el error sin romper la web
-                    console.error("Error al comprobar rol en Firestore:", error);
+                    console.error("Error al comprobar rol:", error);
                 }
             } else {
                 menuLogin.classList.remove('hidden');
@@ -153,25 +150,41 @@
             
             signInWithEmailAndPassword(auth, email, pass)
                 .then(() => {
+                    // Cerramos el modal
+                    loginModal.classList.add('hidden');
+                    // Limpiamos los campos
                     document.getElementById('login-email').value = "";
                     document.getElementById('login-pass').value = "";
+                    // Llevamos al usuario al inicio de la web (arriba del todo)
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 })
                 .catch((error) => alert("Error: Verifica tu correo o contraseña."));
         });
 
-        // LOGIN CON GOOGLE
+        // LOGIN CON GOOGLE (Mantenemos el Popup)
         document.getElementById('btn-google').addEventListener('click', () => {
-            console.log("Abriendo popup de Google...");
-            signInWithPopup(auth, googleProvider).catch((error) => {
-                console.error("Error del popup de Google:", error);
-                alert("Error con Google: " + error.message);
-            });
+            signInWithPopup(auth, googleProvider)
+                .then(() => {
+                    // Cerramos el modal de acceso exclusivo
+                    loginModal.classList.add('hidden');
+                    // Llevamos al usuario al inicio de la web suavemente
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                })
+                .catch((error) => {
+                    // Ignoramos el error si el usuario cerró la ventana de Google a propósito
+                    if (error.code !== 'auth/popup-closed-by-user') {
+                        console.error("Error de Google:", error);
+                        alert("Error al conectar con Google.");
+                    }
+                });
         });
 
         // FUNCIÓN SALIR
         btnLogout.addEventListener('click', (e) => {
             e.preventDefault();
-            signOut(auth).then(() => window.location.reload());
+            signOut(auth).then(() => {
+                window.location.reload(); 
+            });
         });
     </script>
 </body>
