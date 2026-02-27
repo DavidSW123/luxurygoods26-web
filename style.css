@@ -60,7 +60,7 @@ body { font-family: var(--font-sans); }
 
 /* Logo y Tagline en la cabecera */
 .main-logo {
-    height: 340px; /* ¡Aumentamos el tamaño al doble! */
+    height: 340px; 
     width: auto;
     margin-bottom: 1rem;
 }
@@ -73,7 +73,7 @@ body { font-family: var(--font-sans); }
     opacity: 0.9;
 }
 
-/* --- SECCIÓN CENTRAL BLANCA --- */
+/* --- SECCIÓN CENTRAL BLANCA (Antigua Home / Shop) --- */
 .white-section {
     background-color: #FFFFFF;
     padding: 8rem 5%; 
@@ -82,7 +82,6 @@ body { font-family: var(--font-sans); }
     align-items: center;
 }
 
-/* Contenedor del producto destacado */
 .featured-product {
     display: flex;
     align-items: center;
@@ -91,7 +90,6 @@ body { font-family: var(--font-sans); }
     gap: 6rem; 
 }
 
-/* Imagen del producto */
 .product-image-container {
     flex: 1.2; 
 }
@@ -103,14 +101,12 @@ body { font-family: var(--font-sans); }
     box-shadow: 0 20px 40px rgba(0,0,0,0.08); 
 }
 
-/* Información del producto */
 .product-info-container {
     flex: 1;
     text-align: left;
     padding-right: 2rem;
 }
 
-/* Círculo para el icono de la corona */
 .crown-icon-wrapper {
     display: inline-block;
     background-color: rgba(197, 160, 89, 0.15); 
@@ -143,7 +139,7 @@ body { font-family: var(--font-sans); }
 }
 
 .footer-logo {
-    height: 90px; /* Más grande para que se lea bien abajo */
+    height: 90px; 
     width: auto;
     margin-bottom: 2rem;
 }
@@ -159,42 +155,141 @@ body { font-family: var(--font-sans); }
 }
 
 /* =======================================================
+   CLASES UTILITARIAS PARA FIREBASE
+======================================================= */
+.hidden {
+    display: none !important;
+}
+
+.admin-link {
+    color: var(--gold) !important;
+    font-weight: bold;
+}
+
+/* =======================================================
+   NUEVA HOME (MARKETING & SEO)
+======================================================= */
+.hero-section {
+    background-color: #FAFAFA;
+    padding: 6rem 5%;
+    text-align: center;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+}
+
+.hero-title {
+    font-family: var(--font-serif);
+    font-size: 3.5rem;
+    color: var(--text-on-white);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+    color: #555;
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 3rem auto;
+    line-height: 1.6;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.btn-primary {
+    background-color: var(--gold);
+    color: #121212;
+    padding: 15px 35px;
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    border: 1px solid var(--gold);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--gold);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-on-white);
+    padding: 15px 35px;
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid #333;
+    transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+.brand-pillars-section {
+    background-color: #FFFFFF;
+    padding: 6rem 5%;
+    display: flex;
+    justify-content: space-between;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pillar {
+    flex: 1;
+    text-align: center;
+}
+
+.pillar-title {
+    font-family: var(--font-serif);
+    color: var(--gold);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.pillar-desc {
+    color: #666;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+
+/* =======================================================
    REGLAS RESPONSIVE (MAGIA PARA MÓVILES Y TABLETS)
 ======================================================= */
 
 /* Para Tablets y pantallas medianas (hasta 992px) */
 @media (max-width: 992px) {
-    .featured-product {
-        gap: 3rem; /* Reducimos el hueco enorme del centro */
-    }
-    .product-title {
-        font-size: 2.2rem; /* Achicamos un poco el título */
-    }
-    .white-section {
-        padding: 6rem 5%;
-    }
+    .featured-product { gap: 3rem; }
+    .product-title { font-size: 2.2rem; }
+    .white-section { padding: 6rem 5%; }
 }
 
 /* Para Móviles (hasta 768px) */
 @media (max-width: 768px) {
     /* Ajustes del Menú y Logo */
     .top-nav ul {
-        flex-direction: column; /* Ponemos el menú en lista vertical */
+        flex-direction: column; 
         gap: 1.2rem;
         margin-bottom: 2rem;
     }
-    .main-logo {
-        height: 90px; /* Tamaño perfecto para la pantalla del móvil */
-    }
+    .main-logo { height: 90px; }
     .tagline {
         font-size: 0.85rem;
         padding: 0 10px;
     }
     
-    /* Ajustes de la sección central: Apilamos imagen y texto */
+    /* Ajustes de la sección central (Shop) */
     .featured-product {
-        flex-direction: column; /* Imagen arriba, texto abajo */
-        text-align: center; /* Todo centrado */
+        flex-direction: column; 
+        text-align: center; 
         gap: 3rem;
     }
     .product-info-container {
@@ -202,130 +297,19 @@ body { font-family: var(--font-sans); }
         text-align: center;
         display: flex;
         flex-direction: column;
-        align-items: center; /* Centramos el icono de la corona */
+        align-items: center; 
     }
-    .product-title {
-        font-size: 2rem;
-    }
+    .product-title { font-size: 2rem; }
     .product-description {
         max-width: 100%;
         font-size: 1rem;
     }
     
+    /* Ajustes de la Nueva Home */
+    .hero-title { font-size: 2.5rem; }
+    .hero-buttons { flex-direction: column; }
+    .brand-pillars-section { flex-direction: column; gap: 3rem; }
+
     /* Ajustes del Footer */
-    .marble-footer {
-        padding: 3rem 5% 2rem 5%;
-    }
-        /* =======================================================
-    CLASES UTILITARIAS PARA FIREBASE (Añadir al final)
-    ======================================================= */
-    .hidden {
-        display: none !important;
-    }
-
-    .admin-link {
-        color: var(--gold) !important;
-        font-weight: bold;
-    }
-
-        /* =======================================================
-    NUEVA HOME (MARKETING & SEO)
-    ======================================================= */
-    .hero-section {
-        background-color: #FAFAFA;
-        padding: 6rem 5%;
-        text-align: center;
-        border-bottom: 1px solid rgba(197, 160, 89, 0.2);
-    }
-
-    .hero-title {
-        font-family: var(--font-serif);
-        font-size: 3.5rem;
-        color: var(--text-on-white);
-        line-height: 1.2;
-        margin-bottom: 1.5rem;
-    }
-
-    .hero-subtitle {
-        color: #555;
-        font-size: 1.2rem;
-        max-width: 600px;
-        margin: 0 auto 3rem auto;
-        line-height: 1.6;
-    }
-
-    .hero-buttons {
-        display: flex;
-        gap: 1.5rem;
-        justify-content: center;
-    }
-
-    .btn-primary {
-        background-color: var(--gold);
-        color: #121212;
-        padding: 15px 35px;
-        text-decoration: none;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: all 0.3s;
-        border: 1px solid var(--gold);
-    }
-
-    .btn-primary:hover {
-        background-color: transparent;
-        color: var(--gold);
-    }
-
-    .btn-secondary {
-        background-color: transparent;
-        color: var(--text-on-white);
-        padding: 15px 35px;
-        text-decoration: none;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border: 1px solid #333;
-        transition: all 0.3s;
-    }
-
-    .btn-secondary:hover {
-        border-color: var(--gold);
-        color: var(--gold);
-    }
-
-    .brand-pillars-section {
-        background-color: #FFFFFF;
-        padding: 6rem 5%;
-        display: flex;
-        justify-content: space-between;
-        gap: 4rem;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .pillar {
-        flex: 1;
-        text-align: center;
-    }
-
-    .pillar-title {
-        font-family: var(--font-serif);
-        color: var(--gold);
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-    }
-
-    .pillar-desc {
-        color: #666;
-        line-height: 1.7;
-        font-size: 0.95rem;
-    }
-
-    /* Responsive para la Home */
-    @media (max-width: 768px) {
-        .hero-title { font-size: 2.5rem; }
-        .hero-buttons { flex-direction: column; }
-        .brand-pillars-section { flex-direction: column; gap: 3rem; }
-    }
+    .marble-footer { padding: 3rem 5% 2rem 5%; }
 }
