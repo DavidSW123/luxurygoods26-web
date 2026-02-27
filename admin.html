@@ -100,6 +100,7 @@
             color: white;
             border-radius: 4px;
             font-family: 'Montserrat', sans-serif;
+            box-sizing: border-box; /* Añadido para que no se salgan del contenedor */
         }
 
         input:focus, select:focus, textarea:focus {
@@ -125,6 +126,11 @@
             background-color: var(--gold);
             color: var(--bg-dark);
         }
+        
+        .btn-gold:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
 
         .file-upload {
             border: 1px dashed var(--gold);
@@ -133,6 +139,11 @@
             background-color: #1a1a1a;
             cursor: pointer;
             color: #888;
+            transition: background-color 0.3s;
+        }
+        
+        .file-upload:hover {
+            background-color: #222;
         }
     </style>
 </head>
@@ -152,7 +163,7 @@
         <h1>Añadir Nuevo Producto</h1>
         
         <div class="admin-card">
-            <form action="#" method="POST" enctype="multipart/form-data">
+            <form id="add-product-form">
                 
                 <div class="form-group">
                     <label for="nombre">Nombre del Producto (H1 para SEO)</label>
@@ -175,21 +186,111 @@
 
                 <div class="form-group">
                     <label for="descripcion">Descripción SEO (Atractiva para Google y clientes)</label>
-                    <textarea id="descripcion" rows="4" placeholder="Describe los materiales, la historia y la exclusividad de la pieza..."></textarea>
+                    <textarea id="descripcion" rows="4" placeholder="Describe los materiales, la historia y la exclusividad de la pieza..." required></textarea>
                 </div>
 
                 <div class="form-group">
                     <label>Imagen del Producto</label>
-                    <div class="file-upload">
-                        <p>Haz clic para subir o arrastra la imagen aquí (.jpg, .png)</p>
-                        <input type="file" style="display:none;" id="imagen" accept="image/*">
+                    <div class="file-upload" id="dropzone">
+                        <p id="file-name">Haz clic para subir o arrastra la imagen aquí (.jpg, .png)</p>
+                        <input type="file" style="display:none;" id="imagen" accept="image/*" required>
                     </div>
                 </div>
 
-                <button type="button" class="btn-gold">Guardar Producto</button>
+                <button type="submit" class="btn-gold" id="submit-btn">Guardar Producto</button>
             </form>
         </div>
     </main>
 
+    <script type="module">
+        // 1. Importar Firebase (Firestore para textos y Storage para la imagen física)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
+
+        // 2. Configuración de tu proyecto
+        const firebaseConfig = {
+            apiKey: "AIzaSyAdWnW_eamYoki_qYd3huavNh5baxOJIRA",
+            authDomain: "luxurygoods26.firebaseapp.com",
+            projectId: "luxurygoods26",
+            storageBucket: "luxurygoods26.firebasestorage.app",
+            messagingSenderId: "603153460354",
+            appId: "1:603153460354:web:97534032034721a8d4989b"
+        };
+
+        // 3. Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+
+        // --- LÓGICA PARA EL BOTÓN BONITO DE SUBIR IMAGEN ---
+        const dropzone = document.getElementById('dropzone');
+        const fileInput = document.getElementById('imagen');
+        const fileNameDisplay = document.getElementById('file-name');
+
+        // Cuando hacen clic en el recuadro, es como si hicieran clic en el input oculto
+        dropzone.addEventListener('click', () => fileInput.click());
+
+        // Cuando seleccionan un archivo, cambiamos el texto para mostrar el nombre
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                fileNameDisplay.textContent = "✅ " + e.target.files[0].name;
+                fileNameDisplay.style.color = "#C5A059"; // Letra dorada al seleccionar
+            } else {
+                fileNameDisplay.textContent = "Haz clic para subir o arrastra la imagen aquí (.jpg, .png)";
+                fileNameDisplay.style.color = "#888";
+            }
+        });
+
+        // --- LÓGICA DE GUARDADO EN FIREBASE ---
+        const form = document.getElementById('add-product-form');
+        const submitBtn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const file = fileInput.files[0];
+            if (!file) {
+                alert("Por favor, selecciona una imagen.");
+                return;
+            }
+
+            // Cambiar el botón mientras carga para que el usuario sepa que está trabajando
+            submitBtn.textContent = "Guardando...";
+            submitBtn.disabled = true;
+
+            try {
+                // Paso A: Subir la imagen a Firebase Storage
+                const storageRef = ref(storage, 'productos/' + file.name + '-' + Date.now());
+                await uploadBytes(storageRef, file);
+                const imageUrl = await getDownloadURL(storageRef); // Obtiene el link público de la imagen
+
+                // Paso B: Guardar toda la info + el link de la imagen en Firestore Database
+                await addDoc(collection(db, "productos"), {
+                    nombre: document.getElementById('nombre').value,
+                    categoria: document.getElementById('categoria').value,
+                    precio: Number(document.getElementById('precio').value),
+                    descripcion: document.getElementById('descripcion').value,
+                    imagen: imageUrl, // Aquí guardamos el enlace de la imagen que acabamos de subir
+                    fecha: new Date()
+                });
+
+                alert("¡Producto de lujo guardado con éxito!");
+                
+                // Limpiar el formulario para el siguiente
+                form.reset();
+                fileNameDisplay.textContent = "Haz clic para subir o arrastra la imagen aquí (.jpg, .png)";
+                fileNameDisplay.style.color = "#888";
+
+            } catch (error) {
+                console.error("Error al guardar:", error);
+                alert("Hubo un error. Revisa la consola para más detalles.");
+            } finally {
+                // Devolver el botón a la normalidad
+                submitBtn.textContent = "Guardar Producto";
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
 </body>
 </html>
