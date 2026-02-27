@@ -19,8 +19,8 @@
                 <li><a href="#">Contact</a></li>
                 
                 <li id="menu-login"><a href="#" id="btn-open-login">Acceso</a></li>
-                <li id="menu-admin" class="hidden"><a href="admin.html" class="admin-link">Panel Admin</a></li>
-                <li id="menu-logout" class="hidden"><a href="#" id="btn-logout">Salir</a></li>
+                <li id="menu-admin" style="display: none;"><a href="admin.html" style="color: #C5A059; font-weight: bold;">Panel Admin</a></li>
+                <li id="menu-logout" style="display: none;"><a href="#" id="btn-logout">Salir</a></li>
             </ul>
         </nav>
         
@@ -56,7 +56,7 @@
         <p class="copyright">&copy; 2026 Luxury Goods. Todos los derechos reservados.</p>
     </footer>
 
-    <div id="login-modal" class="hidden" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:1000; display:flex; justify-content:center; align-items:center;">
+    <div id="login-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:1000; display:none; justify-content:center; align-items:center;">
         <div style="background:#1E1E1E; padding:35px; border-radius:8px; border:1px solid rgba(197, 160, 89, 0.3); text-align:center; max-width: 400px; width: 90%; font-family:'Montserrat', sans-serif;">
             <h2 style="color:#C5A059; font-family:'Cinzel', serif; margin-bottom: 25px;">Acceso Exclusivo</h2>
             
@@ -79,8 +79,6 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-        
-        // ¡CAMBIO AQUÍ! Importamos initializeFirestore en lugar de getFirestore
         import { initializeFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -95,8 +93,7 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const googleProvider = new GoogleAuthProvider();
-
-        // ¡CAMBIO AQUÍ! Inicializamos Firestore con el truco anti-adblockers
+        
         const db = initializeFirestore(app, {
             experimentalForceLongPolling: true
         });
@@ -109,41 +106,40 @@
         const btnCloseModal = document.getElementById('btn-close-modal');
         const btnLogout = document.getElementById('btn-logout');
 
-        // Abrir y cerrar el modal manualmente
+        // ABRIR MODAL
         btnOpenLogin.addEventListener('click', (e) => {
             e.preventDefault();
-            loginModal.classList.remove('hidden');
+            loginModal.style.display = 'flex'; // Forzamos que se vea
         });
 
+        // CERRAR MODAL
         btnCloseModal.addEventListener('click', () => {
-            loginModal.classList.add('hidden');
+            loginModal.style.display = 'none'; // Forzamos que se oculte
         });
 
         // EL PORTERO AUTOMÁTICO
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                // Por seguridad extra, ocultamos el modal oscuro aquí también
-                loginModal.classList.add('hidden');
-                
-                menuLogin.classList.add('hidden');
-                menuLogout.classList.remove('hidden');
+                loginModal.style.display = 'none'; // Aseguramos que se esconda
+                menuLogin.style.display = 'none';
+                menuLogout.style.display = 'block';
 
                 try {
                     const docRef = doc(db, "usuarios", user.uid);
                     const docSnap = await getDoc(docRef);
                     
                     if (docSnap.exists() && docSnap.data().rol === "admin") {
-                        menuAdmin.classList.remove('hidden');
+                        menuAdmin.style.display = 'block';
                     } else {
-                        menuAdmin.classList.add('hidden');
+                        menuAdmin.style.display = 'none';
                     }
                 } catch (error) {
                     console.error("Error al comprobar rol:", error);
                 }
             } else {
-                menuLogin.classList.remove('hidden');
-                menuAdmin.classList.add('hidden');
-                menuLogout.classList.add('hidden');
+                menuLogin.style.display = 'block';
+                menuAdmin.style.display = 'none';
+                menuLogout.style.display = 'none';
             }
         });
 
@@ -155,7 +151,7 @@
             
             signInWithEmailAndPassword(auth, email, pass)
                 .then(() => {
-                    loginModal.classList.add('hidden');
+                    loginModal.style.display = 'none';
                     document.getElementById('login-email').value = "";
                     document.getElementById('login-pass').value = "";
                     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -167,7 +163,7 @@
         document.getElementById('btn-google').addEventListener('click', () => {
             signInWithPopup(auth, googleProvider)
                 .then(() => {
-                    loginModal.classList.add('hidden');
+                    loginModal.style.display = 'none';
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 })
                 .catch((error) => {
