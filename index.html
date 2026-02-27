@@ -78,8 +78,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        // Añadimos GoogleAuthProvider y signInWithPopup
-        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, FacebookAuthProvider, OAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
         import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -94,19 +93,16 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        const googleProvider = new GoogleAuthProvider(); // Activamos el proveedor de Google
+        const googleProvider = new GoogleAuthProvider();
 
-        // Elementos del DOM
         const menuLogin = document.getElementById('menu-login');
         const menuAdmin = document.getElementById('menu-admin');
         const menuLogout = document.getElementById('menu-logout');
-        
         const loginModal = document.getElementById('login-modal');
         const btnOpenLogin = document.getElementById('btn-open-login');
         const btnCloseModal = document.getElementById('btn-close-modal');
         const btnLogout = document.getElementById('btn-logout');
 
-        // LÓGICA DEL MODAL (Abrir y Cerrar)
         btnOpenLogin.addEventListener('click', (e) => {
             e.preventDefault();
             loginModal.classList.remove('hidden');
@@ -116,24 +112,33 @@
             loginModal.classList.add('hidden');
         });
 
-        // ESCUCHADOR DE SESIÓN (El portero)
+        // ESCUCHADOR DE SESIÓN MEJORADO A PRUEBA DE FALLOS
         onAuthStateChanged(auth, async (user) => {
+            console.log("ESTADO DE SESIÓN: ", user ? "Logueado como " + user.email : "Desconectado");
+            
             if (user) {
-                // Hay sesión: Cambiamos el menú
+                // Forzamos que se cierre el modal sí o sí
+                loginModal.classList.add('hidden');
                 menuLogin.classList.add('hidden');
                 menuLogout.classList.remove('hidden');
 
-                // Comprobamos si el usuario actual es Admin
-                const docRef = doc(db, "usuarios", user.uid);
-                const docSnap = await getDoc(docRef);
-
-                if (docSnap.exists() && docSnap.data().rol === "admin") {
-                    menuAdmin.classList.remove('hidden');
-                } else {
-                    menuAdmin.classList.add('hidden');
+                try {
+                    // Intentamos ver si eres admin
+                    const docRef = doc(db, "usuarios", user.uid);
+                    const docSnap = await getDoc(docRef);
+                    
+                    if (docSnap.exists() && docSnap.data().rol === "admin") {
+                        console.log("¡Permiso de Admin concedido!");
+                        menuAdmin.classList.remove('hidden');
+                    } else {
+                        console.log("Usuario normal, sin panel de admin.");
+                        menuAdmin.classList.add('hidden');
+                    }
+                } catch (error) {
+                    // Si la base de datos falla, capturamos el error sin romper la web
+                    console.error("Error al comprobar rol en Firestore:", error);
                 }
             } else {
-                // No hay sesión
                 menuLogin.classList.remove('hidden');
                 menuAdmin.classList.add('hidden');
                 menuLogout.classList.add('hidden');
@@ -144,16 +149,10 @@
         document.getElementById('btn-email-login').addEventListener('click', () => {
             const email = document.getElementById('login-email').value;
             const pass = document.getElementById('login-pass').value;
+            if(!email || !pass) return alert("Por favor, rellena ambos campos.");
             
-            if(!email || !pass) {
-                alert("Por favor, rellena ambos campos.");
-                return;
-            }
-
             signInWithEmailAndPassword(auth, email, pass)
                 .then(() => {
-                    loginModal.classList.add('hidden');
-                    // Borramos los campos para que quede limpio
                     document.getElementById('login-email').value = "";
                     document.getElementById('login-pass').value = "";
                 })
@@ -162,22 +161,17 @@
 
         // LOGIN CON GOOGLE
         document.getElementById('btn-google').addEventListener('click', () => {
-            signInWithPopup(auth, googleProvider)
-                .then((result) => {
-                    loginModal.classList.add('hidden');
-                })
-                .catch((error) => alert("Error con Google: " + error.message));
+            console.log("Abriendo popup de Google...");
+            signInWithPopup(auth, googleProvider).catch((error) => {
+                console.error("Error del popup de Google:", error);
+                alert("Error con Google: " + error.message);
+            });
         });
 
-        // FUNCIÓN SALIR (Arreglada)
+        // FUNCIÓN SALIR
         btnLogout.addEventListener('click', (e) => {
-            e.preventDefault(); // Evita que la página salte
-            signOut(auth).then(() => {
-                // Al salir, recargamos la web de forma segura
-                window.location.href = window.location.pathname; 
-            }).catch((error) => {
-                console.error("Error al salir:", error);
-            });
+            e.preventDefault();
+            signOut(auth).then(() => window.location.reload());
         });
     </script>
 </body>
