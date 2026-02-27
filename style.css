@@ -216,4 +216,15 @@ body { font-family: var(--font-sans); }
     .marble-footer {
         padding: 3rem 5% 2rem 5%;
     }
+        /* =======================================================
+    CLASES UTILITARIAS PARA FIREBASE (Añadir al final)
+    ======================================================= */
+    .hidden {
+        display: none !important;
+    }
+
+    .admin-link {
+        color: var(--gold) !important;
+        font-weight: bold;
+    }
 }
