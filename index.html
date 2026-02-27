@@ -78,9 +78,10 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        // Volvemos a usar signInWithPopup
         import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        
+        // ¡CAMBIO AQUÍ! Importamos initializeFirestore en lugar de getFirestore
+        import { initializeFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAdWnW_eamYoki_qYd3huavNh5baxOJIRA",
@@ -93,8 +94,12 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        const db = getFirestore(app);
         const googleProvider = new GoogleAuthProvider();
+
+        // ¡CAMBIO AQUÍ! Inicializamos Firestore con el truco anti-adblockers
+        const db = initializeFirestore(app, {
+            experimentalForceLongPolling: true
+        });
 
         const menuLogin = document.getElementById('menu-login');
         const menuAdmin = document.getElementById('menu-admin');
@@ -117,7 +122,7 @@
         // EL PORTERO AUTOMÁTICO
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                // 1. Por seguridad extra, ocultamos el modal oscuro aquí también
+                // Por seguridad extra, ocultamos el modal oscuro aquí también
                 loginModal.classList.add('hidden');
                 
                 menuLogin.classList.add('hidden');
@@ -150,28 +155,22 @@
             
             signInWithEmailAndPassword(auth, email, pass)
                 .then(() => {
-                    // Cerramos el modal
                     loginModal.classList.add('hidden');
-                    // Limpiamos los campos
                     document.getElementById('login-email').value = "";
                     document.getElementById('login-pass').value = "";
-                    // Llevamos al usuario al inicio de la web (arriba del todo)
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 })
                 .catch((error) => alert("Error: Verifica tu correo o contraseña."));
         });
 
-        // LOGIN CON GOOGLE (Mantenemos el Popup)
+        // LOGIN CON GOOGLE
         document.getElementById('btn-google').addEventListener('click', () => {
             signInWithPopup(auth, googleProvider)
                 .then(() => {
-                    // Cerramos el modal de acceso exclusivo
                     loginModal.classList.add('hidden');
-                    // Llevamos al usuario al inicio de la web suavemente
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 })
                 .catch((error) => {
-                    // Ignoramos el error si el usuario cerró la ventana de Google a propósito
                     if (error.code !== 'auth/popup-closed-by-user') {
                         console.error("Error de Google:", error);
                         alert("Error al conectar con Google.");
