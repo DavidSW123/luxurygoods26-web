@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Luxury Goods. Moda de alta calidad y calzado premium. Descubre nuestra colección de ropa y zapatillas exclusivas diseñadas para marcar la diferencia.">
-    <title>Luxury Goods | Moda Premium y Calzado Exclusivo</title>
+    <meta name="description" content="Luxury Goods. Curated Elegance & Exquisite Craftsmanship. Relojería y joyería de lujo.">
+    <title>Luxury Goods | Elegancia Curada</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <header class="marble-header" style="padding-bottom: 2rem;">
+    <header class="marble-header">
         <nav class="top-nav">
             <ul>
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="new-arrivals.html">New Arrivals</a></li>
-                <li><a href="contacto.html">Contact</a></li>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Shop</a></li>
+                <li><a href="#">New Arrivals</a></li>
+                <li><a href="#">Contact</a></li>
                 
                 <li id="menu-login"><a href="#" id="btn-open-login">Acceso</a></li>
                 <li id="menu-admin" style="display: none;"><a href="admin.html" style="color: #C5A059; font-weight: bold;">Panel Admin</a></li>
@@ -25,42 +25,31 @@
         </nav>
         
         <div class="logo-container">
-            <img src="logo.png" alt="Luxury Goods Logo" class="main-logo" style="height: 250px;">
-            <p class="tagline">Premium Apparel & Exclusive Footwear</p>
+            <img src="logo.png" alt="Luxury Goods Logo" class="main-logo">
+            <p class="tagline">Curated Elegance, Exquisite Craftsmanship</p>
         </div>
     </header>
 
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1 class="hero-title">Viste la<br>Exclusividad</h1>
-            <p class="hero-subtitle">Descubre nuestra cuidada selección de moda y calzado de lujo. Piezas confeccionadas con los mejores materiales para quienes exigen lo extraordinario en cada paso.</p>
-            <div class="hero-buttons">
-                <a href="shop.html" class="btn-primary">Explorar Colección</a>
-                <a href="new-arrivals.html" class="btn-secondary">Novedades</a>
+    <main class="white-section">
+        <section class="featured-product">
+            <div class="product-image-container">
+                <img src="reloj.jpeg" alt="Reloj de lujo en caja de cuero Luxury Goods">
             </div>
-        </div>
-    </section>
-
-    <main class="brand-pillars-section">
-        <div class="pillar">
-            <h3 class="pillar-title">Tejidos de Autor</h3>
-            <p class="pillar-desc">Cada prenda está diseñada con patrones precisos y algodones o sedas de la más alta calidad para garantizar un ajuste perfecto y una caída excepcional.</p>
-        </div>
-        <div class="pillar">
-            <h3 class="pillar-title">Calzado Premium</h3>
-            <p class="pillar-desc">Zapatillas y zapatos que combinan diseño vanguardista con confort absoluto, utilizando cueros seleccionados y materiales innovadores que marcan tendencia.</p>
-        </div>
-        <div class="pillar">
-            <h3 class="pillar-title">Ediciones Limitadas</h3>
-            <p class="pillar-desc">Colecciones cápsula y lanzamientos exclusivos (drops) curados por nuestros expertos para quienes buscan destacar con piezas únicas en su armario.</p>
-        </div>
+            <div class="product-info-container">
+                <div class="crown-icon-wrapper">
+                    <img src="crown-icon.png" alt="Corona" class="crown-icon">
+                </div>
+                <h2 class="product-title">Classic Timeless Pieces</h2>
+                <p class="product-description">Descubre la precisión de nuestra colección de relojería suiza. Piezas diseñadas para perdurar.</p>
+            </div>
+        </section>
     </main>
 
     <footer class="marble-footer">
         <div class="footer-content">
             <img src="logo.png" alt="Luxury Goods Logo Footer" class="footer-logo">
             <div class="contact-info">
-                <p>Moda Premium, Estilo Inconfundible</p>
+                <p>Elegancia Curada, Artesanía Exquisita</p>
                 <p>Contacto: info@luxurygoods.com</p>
             </div>
         </div>
@@ -104,7 +93,10 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const googleProvider = new GoogleAuthProvider();
-        const db = initializeFirestore(app, { experimentalForceLongPolling: true });
+        
+        const db = initializeFirestore(app, {
+            experimentalForceLongPolling: true
+        });
 
         const menuLogin = document.getElementById('menu-login');
         const menuAdmin = document.getElementById('menu-admin');
@@ -114,23 +106,36 @@
         const btnCloseModal = document.getElementById('btn-close-modal');
         const btnLogout = document.getElementById('btn-logout');
 
-        btnOpenLogin.addEventListener('click', (e) => { e.preventDefault(); loginModal.style.display = 'flex'; });
-        btnCloseModal.addEventListener('click', () => { loginModal.style.display = 'none'; });
+        // ABRIR MODAL
+        btnOpenLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'flex'; // Forzamos que se vea
+        });
 
+        // CERRAR MODAL
+        btnCloseModal.addEventListener('click', () => {
+            loginModal.style.display = 'none'; // Forzamos que se oculte
+        });
+
+        // EL PORTERO AUTOMÁTICO
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                loginModal.style.display = 'none';
+                loginModal.style.display = 'none'; // Aseguramos que se esconda
                 menuLogin.style.display = 'none';
                 menuLogout.style.display = 'block';
+
                 try {
                     const docRef = doc(db, "usuarios", user.uid);
                     const docSnap = await getDoc(docRef);
+                    
                     if (docSnap.exists() && docSnap.data().rol === "admin") {
                         menuAdmin.style.display = 'block';
                     } else {
                         menuAdmin.style.display = 'none';
                     }
-                } catch (error) { console.error("Error al comprobar rol:", error); }
+                } catch (error) {
+                    console.error("Error al comprobar rol:", error);
+                }
             } else {
                 menuLogin.style.display = 'block';
                 menuAdmin.style.display = 'none';
@@ -138,30 +143,43 @@
             }
         });
 
+        // LOGIN CON EMAIL
         document.getElementById('btn-email-login').addEventListener('click', () => {
             const email = document.getElementById('login-email').value;
             const pass = document.getElementById('login-pass').value;
             if(!email || !pass) return alert("Por favor, rellena ambos campos.");
-            signInWithEmailAndPassword(auth, email, pass).then(() => {
-                loginModal.style.display = 'none';
-                document.getElementById('login-email').value = "";
-                document.getElementById('login-pass').value = "";
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }).catch((error) => alert("Error: Verifica tu correo o contraseña."));
+            
+            signInWithEmailAndPassword(auth, email, pass)
+                .then(() => {
+                    loginModal.style.display = 'none';
+                    document.getElementById('login-email').value = "";
+                    document.getElementById('login-pass').value = "";
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                })
+                .catch((error) => alert("Error: Verifica tu correo o contraseña."));
         });
 
+        // LOGIN CON GOOGLE
         document.getElementById('btn-google').addEventListener('click', () => {
-            signInWithPopup(auth, googleProvider).then(() => {
-                loginModal.style.display = 'none';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }).catch((error) => {
-                if (error.code !== 'auth/popup-closed-by-user') { alert("Error al conectar con Google."); }
-            });
+            signInWithPopup(auth, googleProvider)
+                .then(() => {
+                    loginModal.style.display = 'none';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                })
+                .catch((error) => {
+                    if (error.code !== 'auth/popup-closed-by-user') {
+                        console.error("Error de Google:", error);
+                        alert("Error al conectar con Google.");
+                    }
+                });
         });
 
+        // FUNCIÓN SALIR
         btnLogout.addEventListener('click', (e) => {
             e.preventDefault();
-            signOut(auth).then(() => { window.location.reload(); });
+            signOut(auth).then(() => {
+                window.location.reload(); 
+            });
         });
     </script>
 </body>
