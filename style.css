@@ -1,0 +1,219 @@
+:root {
+    --gold: #C5A059; /* Color dorado del branding */
+    --text-on-marble: #F0F0F0; /* Blanco roto para texto sobre mármol */
+    --text-on-white: #222222; /* Gris oscuro para texto sobre blanco */
+    --font-serif: 'Cinzel', serif; /* Fuente para títulos elegantes */
+    --font-sans: 'Montserrat', sans-serif; /* Fuente para cuerpo de texto */
+}
+
+/* Reseteo y estilos base */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font-sans); }
+
+/* --- CABECERA DE MÁRMOL --- */
+.marble-header {
+    background-color: #151515;
+    background-image: linear-gradient(rgba(20, 20, 20, 0.8), rgba(20, 20, 20, 0.8)), url('marmol.png');
+    background-size: cover;
+    background-position: center;
+    padding: 2rem 0 4rem 0;
+    text-align: center;
+    color: var(--text-on-marble);
+    border-bottom: 3px solid var(--gold); 
+}
+
+/* --- FOOTER DE MÁRMOL --- */
+.marble-footer {
+    background-color: #151515;
+    background-image: linear-gradient(rgba(20, 20, 20, 0.8), rgba(20, 20, 20, 0.8)), url('marmol.png');
+    background-size: cover;
+    background-position: center;
+    padding: 4rem 0 2rem 0;
+    text-align: center;
+    color: var(--text-on-marble);
+    border-top: 3px solid var(--gold);
+}
+
+/* Navegación superior */
+.top-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.top-nav a {
+    text-decoration: none;
+    color: var(--text-on-marble);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    padding-bottom: 5px;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+.top-nav a:hover, .top-nav a.active {
+    color: var(--gold);
+    border-bottom: 1px solid var(--gold); 
+}
+
+/* Logo y Tagline en la cabecera */
+.main-logo {
+    height: 340px; /* ¡Aumentamos el tamaño al doble! */
+    width: auto;
+    margin-bottom: 1rem;
+}
+
+.tagline {
+    font-family: var(--font-serif);
+    color: var(--gold);
+    letter-spacing: 1px;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* --- SECCIÓN CENTRAL BLANCA --- */
+.white-section {
+    background-color: #FFFFFF;
+    padding: 8rem 5%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor del producto destacado */
+.featured-product {
+    display: flex;
+    align-items: center;
+    max-width: 1200px; 
+    width: 100%;
+    gap: 6rem; 
+}
+
+/* Imagen del producto */
+.product-image-container {
+    flex: 1.2; 
+}
+
+.product-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08); 
+}
+
+/* Información del producto */
+.product-info-container {
+    flex: 1;
+    text-align: left;
+    padding-right: 2rem;
+}
+
+/* Círculo para el icono de la corona */
+.crown-icon-wrapper {
+    display: inline-block;
+    background-color: rgba(197, 160, 89, 0.15); 
+    border-radius: 50%;
+    padding: 15px;
+    margin-bottom: 2rem;
+}
+
+.crown-icon {
+    height: 28px;
+    width: auto;
+    display: block;
+}
+
+.product-title {
+    font-family: var(--font-serif);
+    font-size: 3rem; 
+    color: var(--text-on-white);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.product-description {
+    color: #555; 
+    font-size: 1.1rem;
+    line-height: 1.8;
+    letter-spacing: 0.5px;
+    max-width: 500px; 
+}
+
+.footer-logo {
+    height: 90px; /* Más grande para que se lea bien abajo */
+    width: auto;
+    margin-bottom: 2rem;
+}
+.contact-info p {
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.copyright {
+    margin-top: 3rem;
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+/* =======================================================
+   REGLAS RESPONSIVE (MAGIA PARA MÓVILES Y TABLETS)
+======================================================= */
+
+/* Para Tablets y pantallas medianas (hasta 992px) */
+@media (max-width: 992px) {
+    .featured-product {
+        gap: 3rem; /* Reducimos el hueco enorme del centro */
+    }
+    .product-title {
+        font-size: 2.2rem; /* Achicamos un poco el título */
+    }
+    .white-section {
+        padding: 6rem 5%;
+    }
+}
+
+/* Para Móviles (hasta 768px) */
+@media (max-width: 768px) {
+    /* Ajustes del Menú y Logo */
+    .top-nav ul {
+        flex-direction: column; /* Ponemos el menú en lista vertical */
+        gap: 1.2rem;
+        margin-bottom: 2rem;
+    }
+    .main-logo {
+        height: 90px; /* Tamaño perfecto para la pantalla del móvil */
+    }
+    .tagline {
+        font-size: 0.85rem;
+        padding: 0 10px;
+    }
+    
+    /* Ajustes de la sección central: Apilamos imagen y texto */
+    .featured-product {
+        flex-direction: column; /* Imagen arriba, texto abajo */
+        text-align: center; /* Todo centrado */
+        gap: 3rem;
+    }
+    .product-info-container {
+        padding-right: 0;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centramos el icono de la corona */
+    }
+    .product-title {
+        font-size: 2rem;
+    }
+    .product-description {
+        max-width: 100%;
+        font-size: 1rem;
+    }
+    
+    /* Ajustes del Footer */
+    .marble-footer {
+        padding: 3rem 5% 2rem 5%;
+    }
+}

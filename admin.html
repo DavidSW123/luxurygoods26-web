@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración | Luxury Goods</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-panel: #1E1E1E;
+            --gold: #C5A059;
+            --text-light: #F5F5F5;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            display: flex;
+        }
+
+        /* Menú lateral (Sidebar) */
+        .sidebar {
+            width: 250px;
+            background-color: #0a0a0a;
+            height: 100vh;
+            padding: 2rem;
+            border-right: 1px solid rgba(197, 160, 89, 0.2);
+            position: fixed;
+        }
+
+        .sidebar h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            color: var(--gold);
+        }
+
+        /* Contenido principal */
+        .main-content {
+            margin-left: 250px;
+            padding: 3rem 5%;
+            width: calc(100% - 250px);
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        /* Formulario para subir productos */
+        .admin-card {
+            background-color: var(--bg-panel);
+            padding: 2.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(197, 160, 89, 0.1);
+            max-width: 800px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ccc;
+            font-weight: 600;
+        }
+
+        input[type="text"], input[type="number"], select, textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: #2A2A2A;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        /* Botón de subida */
+        .btn-gold {
+            background-color: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 12px 24px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn-gold:hover {
+            background-color: var(--gold);
+            color: var(--bg-dark);
+        }
+
+        .file-upload {
+            border: 1px dashed var(--gold);
+            padding: 2rem;
+            text-align: center;
+            background-color: #1a1a1a;
+            cursor: pointer;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <h2>Luxury Goods</h2>
+        <ul>
+            <li><a href="#" class="active">+ Añadir Producto</a></li>
+            <li><a href="#">Gestionar Inventario</a></li>
+            <li><a href="#">Categorías (SEO)</a></li>
+            <li><a href="../index.html" target="_blank">Ver Tienda &#8594;</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <h1>Añadir Nuevo Producto</h1>
+        
+        <div class="admin-card">
+            <form action="#" method="POST" enctype="multipart/form-data">
+                
+                <div class="form-group">
+                    <label for="nombre">Nombre del Producto (H1 para SEO)</label>
+                    <input type="text" id="nombre" placeholder="Ej: Reloj Chronograph Oro Rosa" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="categoria">Categoría</label>
+                    <select id="categoria">
+                        <option value="relojes">Relojes</option>
+                        <option value="joyeria">Joyería</option>
+                        <option value="accesorios">Accesorios</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="precio">Precio (€)</label>
+                    <input type="number" id="precio" placeholder="0.00" step="0.01" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion">Descripción SEO (Atractiva para Google y clientes)</label>
+                    <textarea id="descripcion" rows="4" placeholder="Describe los materiales, la historia y la exclusividad de la pieza..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Imagen del Producto</label>
+                    <div class="file-upload">
+                        <p>Haz clic para subir o arrastra la imagen aquí (.jpg, .png)</p>
+                        <input type="file" style="display:none;" id="imagen" accept="image/*">
+                    </div>
+                </div>
+
+                <button type="button" class="btn-gold">Guardar Producto</button>
+            </form>
+        </div>
+    </main>
+
+</body>
+</html>
