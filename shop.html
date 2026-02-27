@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Luxury Goods. Curated Elegance & Exquisite Craftsmanship. Relojería y joyería de lujo.">
-    <title>Luxury Goods | Elegancia Curada</title>
+    <meta name="description" content="Luxury Goods Shop. Explora nuestra colección exclusiva de moda premium y calzado.">
+    <title>Shop | Luxury Goods</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <header class="marble-header">
+    <header class="marble-header" style="padding-bottom: 2rem;">
         <nav class="top-nav">
             <ul>
-                <li><a href="#" class="active">Home</a></li>
-                <li><a href="#">Shop</a></li>
-                <li><a href="#">New Arrivals</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html" class="active">Shop</a></li>
+                <li><a href="new-arrivals.html">New Arrivals</a></li>
+                <li><a href="contacto.html">Contact</a></li>
                 
                 <li id="menu-login"><a href="#" id="btn-open-login">Acceso</a></li>
                 <li id="menu-admin" style="display: none;"><a href="admin.html" style="color: #C5A059; font-weight: bold;">Panel Admin</a></li>
@@ -25,22 +25,22 @@
         </nav>
         
         <div class="logo-container">
-            <img src="logo.png" alt="Luxury Goods Logo" class="main-logo">
-            <p class="tagline">Curated Elegance, Exquisite Craftsmanship</p>
+            <img src="logo.png" alt="Luxury Goods Logo" class="main-logo" style="height: 250px;">
+            <p class="tagline">Premium Apparel & Exclusive Footwear</p>
         </div>
     </header>
 
     <main class="white-section">
         <section class="featured-product">
             <div class="product-image-container">
-                <img src="reloj.jpeg" alt="Reloj de lujo en caja de cuero Luxury Goods">
+                <img src="reloj.jpeg" alt="Producto de lujo Luxury Goods">
             </div>
             <div class="product-info-container">
                 <div class="crown-icon-wrapper">
                     <img src="crown-icon.png" alt="Corona" class="crown-icon">
                 </div>
-                <h2 class="product-title">Classic Timeless Pieces</h2>
-                <p class="product-description">Descubre la precisión de nuestra colección de relojería suiza. Piezas diseñadas para perdurar.</p>
+                <h2 class="product-title">Colección Atemporal</h2>
+                <p class="product-description">Descubre piezas únicas diseñadas para destacar. Próximamente nuestro escaparate digital completo aquí.</p>
             </div>
         </section>
     </main>
@@ -49,7 +49,7 @@
         <div class="footer-content">
             <img src="logo.png" alt="Luxury Goods Logo Footer" class="footer-logo">
             <div class="contact-info">
-                <p>Elegancia Curada, Artesanía Exquisita</p>
+                <p>Moda Premium, Estilo Inconfundible</p>
                 <p>Contacto: info@luxurygoods.com</p>
             </div>
         </div>
@@ -93,10 +93,7 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const googleProvider = new GoogleAuthProvider();
-        
-        const db = initializeFirestore(app, {
-            experimentalForceLongPolling: true
-        });
+        const db = initializeFirestore(app, { experimentalForceLongPolling: true });
 
         const menuLogin = document.getElementById('menu-login');
         const menuAdmin = document.getElementById('menu-admin');
@@ -106,36 +103,23 @@
         const btnCloseModal = document.getElementById('btn-close-modal');
         const btnLogout = document.getElementById('btn-logout');
 
-        // ABRIR MODAL
-        btnOpenLogin.addEventListener('click', (e) => {
-            e.preventDefault();
-            loginModal.style.display = 'flex'; // Forzamos que se vea
-        });
+        btnOpenLogin.addEventListener('click', (e) => { e.preventDefault(); loginModal.style.display = 'flex'; });
+        btnCloseModal.addEventListener('click', () => { loginModal.style.display = 'none'; });
 
-        // CERRAR MODAL
-        btnCloseModal.addEventListener('click', () => {
-            loginModal.style.display = 'none'; // Forzamos que se oculte
-        });
-
-        // EL PORTERO AUTOMÁTICO
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                loginModal.style.display = 'none'; // Aseguramos que se esconda
+                loginModal.style.display = 'none';
                 menuLogin.style.display = 'none';
                 menuLogout.style.display = 'block';
-
                 try {
                     const docRef = doc(db, "usuarios", user.uid);
                     const docSnap = await getDoc(docRef);
-                    
                     if (docSnap.exists() && docSnap.data().rol === "admin") {
                         menuAdmin.style.display = 'block';
                     } else {
                         menuAdmin.style.display = 'none';
                     }
-                } catch (error) {
-                    console.error("Error al comprobar rol:", error);
-                }
+                } catch (error) { console.error("Error al comprobar rol:", error); }
             } else {
                 menuLogin.style.display = 'block';
                 menuAdmin.style.display = 'none';
@@ -143,43 +127,30 @@
             }
         });
 
-        // LOGIN CON EMAIL
         document.getElementById('btn-email-login').addEventListener('click', () => {
             const email = document.getElementById('login-email').value;
             const pass = document.getElementById('login-pass').value;
             if(!email || !pass) return alert("Por favor, rellena ambos campos.");
-            
-            signInWithEmailAndPassword(auth, email, pass)
-                .then(() => {
-                    loginModal.style.display = 'none';
-                    document.getElementById('login-email').value = "";
-                    document.getElementById('login-pass').value = "";
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                })
-                .catch((error) => alert("Error: Verifica tu correo o contraseña."));
+            signInWithEmailAndPassword(auth, email, pass).then(() => {
+                loginModal.style.display = 'none';
+                document.getElementById('login-email').value = "";
+                document.getElementById('login-pass').value = "";
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }).catch((error) => alert("Error: Verifica tu correo o contraseña."));
         });
 
-        // LOGIN CON GOOGLE
         document.getElementById('btn-google').addEventListener('click', () => {
-            signInWithPopup(auth, googleProvider)
-                .then(() => {
-                    loginModal.style.display = 'none';
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                })
-                .catch((error) => {
-                    if (error.code !== 'auth/popup-closed-by-user') {
-                        console.error("Error de Google:", error);
-                        alert("Error al conectar con Google.");
-                    }
-                });
+            signInWithPopup(auth, googleProvider).then(() => {
+                loginModal.style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }).catch((error) => {
+                if (error.code !== 'auth/popup-closed-by-user') { alert("Error al conectar con Google."); }
+            });
         });
 
-        // FUNCIÓN SALIR
         btnLogout.addEventListener('click', (e) => {
             e.preventDefault();
-            signOut(auth).then(() => {
-                window.location.reload(); 
-            });
+            signOut(auth).then(() => { window.location.reload(); });
         });
     </script>
 </body>
