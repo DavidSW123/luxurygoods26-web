@@ -100,34 +100,44 @@
         const status = document.getElementById("status-message");
         const btn = document.getElementById("submit-button");
 
-        form.addEventListener("submit", async function(event) {
+        form.addEventListener("submit", function(event) {
             event.preventDefault();
             btn.disabled = true;
             status.style.display = "block";
             status.innerHTML = "Procesando su solicitud...";
 
-            const data = new FormData(event.target);
+            // Creamos los datos del formulario
+            const data = new FormData(form);
             
-            fetch(event.target.action, {
-                method: form.method,
+            // El truco está en enviar los datos como JSON o dejar que fetch maneje el FormData correctamente
+            fetch(form.action, {
+                method: 'POST',
                 body: data,
-                headers: { 'Accept': 'application/json' }
+                headers: {
+                    'Accept': 'application/json'
+                }
             }).then(response => {
                 if (response.ok) {
+                    // SI TIENE ÉXITO: El contador subirá y redirigimos
                     window.location.href = "gracias.html";
                 } else {
+                    // SI HAY ERROR DE FORMSPREE:
                     response.json().then(data => {
-                        status.innerHTML = "Error al enviar. Verifique su enlace de Formspree.";
+                        if (Object.hasOwn(data, 'errors')) {
+                            status.innerHTML = "Error: " + data["errors"].map(error => error["message"]).join(", ");
+                        } else {
+                            status.innerHTML = "Error al enviar. Por favor, verifique su código de Formspree.";
+                        }
                         btn.disabled = false;
                     });
                 }
             }).catch(error => {
-                status.innerHTML = "Error de conexión.";
+                // SI HAY ERROR DE RED:
+                status.innerHTML = "Error de conexión. Inténtelo de nuevo.";
                 btn.disabled = false;
             });
         });
     </script>
-
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";

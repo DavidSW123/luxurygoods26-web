@@ -499,4 +499,51 @@ body { font-family: var(--font-sans); background-color: #FAFAFA; }
         align-items: center;
         justify-content: center;
     }
+
+        /* =======================================================
+   NEW ARRIVALS STYLES
+======================================================= */
+.arrivals-container { width: 100%; text-align: center; }
+.arrivals-title { font-family: var(--font-serif); font-size: 3rem; margin-bottom: 0.5rem; color: var(--text-on-white); }
+.arrivals-subtitle { font-size: 1.1rem; color: #777; margin-bottom: 4rem; }
+
+.arrivals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.arrival-card { background: #FFF; transition: transform 0.3s ease; border: 1px solid #EEE; }
+.arrival-card:hover { transform: translateY(-10px); }
+
+.arrival-image { position: relative; overflow: hidden; height: 450px; background: #F9F9F9; }
+.arrival-image img { width: 100%; height: 100%; object-fit: cover; }
+
+.badge-gold {
+    position: absolute; top: 20px; right: 20px;
+    background: var(--gold); color: #FFF;
+    padding: 8px 15px; font-size: 0.75rem;
+    font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+}
+
+.arrival-info { padding: 2rem; text-align: left; }
+.arrival-info h3 { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1rem; color: #222; }
+.arrival-info p { color: #666; font-size: 0.95rem; line-height: 1.6; margin-bottom: 2rem; }
+
+.btn-arrival {
+    display: inline-block; padding: 12px 25px;
+    border: 1px solid var(--gold); color: var(--gold);
+    text-decoration: none; font-size: 0.85rem;
+    font-weight: 600; text-transform: uppercase;
+    transition: all 0.3s;
+}
+.btn-arrival:hover { background: var(--gold); color: #FFF; }
+
+.placeholder-luxury {
+    height: 100%; display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-serif); color: #CCC; font-size: 1.2rem; letter-spacing: 3px;
+    text-transform: uppercase;
+}
 }

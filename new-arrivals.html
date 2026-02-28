@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Novedades exclusivas en Luxury Goods. Últimos lanzamientos disponibles bajo pedido.">
+    <title>New Arrivals | Luxury Goods</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="marble-header">
+        <div class="logo-container">
+            <img src="logo-header.png" alt="Luxury Goods Logo" class="main-logo">
+            <img src="logo-header-2.png" alt="Curated Elegance" class="sub-logo">
+            <p class="tagline">Premium Apparel & Exclusive Footwear</p>
+        </div>
+        <nav class="top-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="new-arrivals.html" class="active">New Arrivals</a></li>
+                <li><a href="contacto.html">Contact</a></li>
+                <li id="menu-login"><a href="#" id="btn-open-login">Acceso</a></li>
+                <li id="menu-admin" style="display: none;"><a href="admin.html" class="admin-link">Panel Admin</a></li>
+                <li id="menu-logout" style="display: none;"><a href="#" id="btn-logout">Salir</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="white-section">
+        <div class="arrivals-container">
+            <h1 class="arrivals-title">Limited Drops</h1>
+            <p class="arrivals-subtitle">Piezas exclusivas disponibles para pre-order por tiempo limitado.</p>
+
+            <div class="arrivals-grid">
+                <div class="arrival-card">
+                    <div class="arrival-image">
+                        <img src="reloj.jpeg" alt="Lanzamiento exclusivo">
+                        <span class="badge-gold">Pre-Order</span>
+                    </div>
+                    <div class="arrival-info">
+                        <h3>Colección Heritage</h3>
+                        <p>Diseño atemporal con materiales de origen certificado.</p>
+                        <a href="contacto.html" class="btn-arrival">Consultar Disponibilidad</a>
+                    </div>
+                </div>
+
+                <div class="arrival-card">
+                    <div class="arrival-image">
+                        <div class="placeholder-luxury">Próximamente</div>
+                    </div>
+                    <div class="arrival-info">
+                        <h3>Próximo Drop</h3>
+                        <p>Suscríbase o contacte con nuestro Concierge para acceso prioritario.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="marble-footer">
+        <div class="footer-grid">
+            <div class="footer-col footer-links">
+                <h4>Colecciones</h4>
+                <ul><li><a href="shop.html">Shop All</a></li><li><a href="new-arrivals.html">Novedades</a></li></ul>
+            </div>
+            <div class="footer-col footer-brand-center">
+                <img src="logo-header.png" alt="Luxury Goods Logo" class="footer-logo">
+                <p class="footer-tagline">Premium Apparel</p>
+            </div>
+            <div class="footer-col footer-contact">
+                <h4>Atención</h4>
+                <ul><li><a href="contacto.html">Contacto</a></li><li><a href="#">Guía de Tallas</a></li></ul>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { initializeFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        const firebaseConfig = { apiKey: "AIzaSyAdWnW_eamYoki_qYd3huavNh5baxOJIRA", authDomain: "luxurygoods26.firebaseapp.com", projectId: "luxurygoods26", storageBucket: "luxurygoods26.firebasestorage.app", messagingSenderId: "603153460354", appId: "1:603153460354:web:97534032034721a8d4989b" };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = initializeFirestore(app, { experimentalForceLongPolling: true });
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                document.getElementById('menu-login').style.display = 'none';
+                document.getElementById('menu-logout').style.display = 'block';
+                try {
+                    const docRef = doc(db, "usuarios", user.uid);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists() && docSnap.data().rol === "admin") { document.getElementById('menu-admin').style.display = 'block'; }
+                } catch (e) {}
+            }
+        });
+    </script>
+</body>
+</html>
