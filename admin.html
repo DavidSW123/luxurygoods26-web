@@ -8,14 +8,13 @@
     <style>
         :root {
             --bg-dark: #121212;
-            --bg-panel: rgba(30, 30, 30, 0.85); /* Semitransparente para ver el mármol */
+            --bg-panel: rgba(30, 30, 30, 0.85);
             --gold: #C5A059;
             --text-light: #F5F5F5;
         }
 
         body {
             font-family: 'Montserrat', sans-serif;
-            /* Fondo de mármol oscuro */
             background-color: var(--bg-dark);
             background-image: linear-gradient(rgba(15, 15, 15, 0.9), rgba(15, 15, 15, 0.9)), url('marmol.png');
             background-size: cover;
@@ -57,8 +56,8 @@
             box-sizing: border-box;
         }
         
-        .section-view { display: none; } /* Ocultar secciones por defecto */
-        .section-view.active { display: block; } /* Mostrar solo la activa */
+        .section-view { display: none; }
+        .section-view.active { display: block; }
 
         h1 { font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 2rem; font-size: 2rem; }
 
@@ -155,7 +154,7 @@
             <li><a onclick="switchTab('add-product')" id="tab-add-product" class="active">+ Añadir Producto</a></li>
             <li><a onclick="switchTab('inventory')" id="tab-inventory">Gestionar Inventario</a></li>
             <li><a onclick="switchTab('categories')" id="tab-categories">Categorías (SEO)</a></li>
-            <li><a href="../index.html" target="_blank">Ver Tienda &#8594;</a></li>
+            <li><a href="index.html" target="_blank">Ver Tienda &#8594;</a></li>
         </ul>
     </nav>
 
@@ -207,9 +206,8 @@
                         </div>
                         
                         <div class="gemini-prompt" id="gemini-panel">
-                            <input type="text" id="gemini-input" placeholder="Ej: Redacta una descripción de lujo para una camiseta negra oversize...">
+                            <input type="text" id="gemini-input" placeholder="Ej: Redacta una descripción para unas sneakers blancas de piel...">
                             <button type="button" onclick="generateDescription()">Generar</button>
-                            <small style="display:block; color:#888; margin-top:5px;">Requiere añadir API Key en el código HTML.</small>
                         </div>
 
                         <textarea id="descripcion" rows="5" placeholder="Describe los materiales, la historia y la exclusividad de la pieza..." required></textarea>
@@ -244,7 +242,7 @@
                         </tr>
                     </thead>
                     <tbody id="inventory-list">
-                        </tbody>
+                    </tbody>
                 </table>
             </div>
         </section>
@@ -258,6 +256,11 @@
                     <select>
                         <option>Sneakers</option>
                         <option>Camisetas</option>
+                        <option>Sudaderas</option>
+                        <option>Chaquetas</option>
+                        <option>Calzado</option>
+                        <option>Tarjeteros</option>
+                        <option>Accesorios</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -304,7 +307,7 @@
         }
 
         // --- SISTEMA MULTI-IMAGEN ---
-        let selectedFiles = []; // Array de objetos { file, id, isMain }
+        let selectedFiles = []; 
         
         const dropzone = document.getElementById('dropzone');
         const fileInput = document.getElementById('imagen');
@@ -316,7 +319,6 @@
             const files = Array.from(e.target.files);
             files.forEach(file => {
                 const id = Math.random().toString(36).substr(2, 9);
-                // La primera imagen se marca como principal por defecto
                 const isMain = selectedFiles.length === 0; 
                 selectedFiles.push({ file, id, isMain });
             });
@@ -345,7 +347,6 @@
 
         window.removeImage = function(id) {
             selectedFiles = selectedFiles.filter(item => item.id !== id);
-            // Si borramos la principal, hacer principal a la primera que quede
             if(selectedFiles.length > 0 && !selectedFiles.some(item => item.isMain)) {
                 selectedFiles[0].isMain = true;
             }
@@ -376,7 +377,6 @@
                 let imageUrls = [];
                 let urlPrincipal = "";
 
-                // Subir todas las imágenes
                 for (let i = 0; i < selectedFiles.length; i++) {
                     const item = selectedFiles[i];
                     const storageRef = ref(storage, 'productos/' + Date.now() + '-' + item.file.name);
@@ -388,7 +388,6 @@
 
                 submitBtn.textContent = "Guardando base de datos...";
 
-                // Guardar en Firestore
                 await addDoc(collection(db, "productos"), {
                     nombre: document.getElementById('nombre').value,
                     ubicacion: document.getElementById('ubicacion').value,
@@ -446,41 +445,38 @@
             }
         }
 
-        // Borrar producto
         window.deleteProduct = async function(id) {
-            if(confirm("¿Seguro que deseas eliminar esta pieza exclusiva del catálogo?")) {
+            if(confirm("¿Seguro que deseas eliminar esta pieza del catálogo?")) {
                 try {
                     await deleteDoc(doc(db, "productos", id));
-                    loadInventory(); // Recargar tabla
+                    loadInventory(); 
                 } catch(error) { alert("Error al borrar."); }
             }
         }
     </script>
 
     <script>
-        // Mostrar/Ocultar panel Gemini
         function toggleGemini() {
             const panel = document.getElementById('gemini-panel');
             panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
         }
 
-        // Función para conectar con Gemini API
         async function generateDescription() {
             const input = document.getElementById('gemini-input').value;
             const textbox = document.getElementById('descripcion');
             
             if(!input) return alert("Escribe qué tipo de prenda es para que Gemini te ayude.");
             
-            // Reemplaza "TU_API_KEY_AQUI" por una clave real de Google AI Studio
-            const GEMINI_API_KEY = "AIzaSyA6FeyzbA7rtJkaZiNhGxIx_jBcERlQB7U"; 
+            // 👇 👇 👇 PEGA TU API KEY AQUÍ ENTRE LAS COMILLAS 👇 👇 👇
+            const GEMINI_API_KEY = "AIzaSyAHmGDmvVrmIZL3moOpdAsoRfa9C6mLkIY"; 
             
-            if(GEMINI_API_KEY === "AIzaSyA6FeyzbA7rtJkaZiNhGxIx_jBcERlQB7U") {
-                alert("Atención: Necesitas registrarte en Google AI Studio y poner tu API Key en el archivo admin.html (línea ~360) para que esto funcione.");
-                textbox.value = "Generado como prueba: Esta es una pieza exclusiva fabricada con los mejores materiales de origen certificado. Un diseño atemporal que eleva cualquier outfit. Diseñado en nuestro estudio bajo los más estrictos estándares de calidad. (Añade tu API de Gemini para textos reales).";
+            if(GEMINI_API_KEY === "_CLAVE_AQUIAIzaSyAHmGDmvVrmIZL3moOpdAsoRfa9C6mLkIY" || GEMINI_API_KEY === "") {
+                alert("❌ NO CONECTADO: Falta la API Key.");
+                textbox.value = "⚠️ ERROR: No hay conexión con Gemini.\n\nDebes buscar en el código de admin.html la línea que dice GEMINI_API_KEY y pegar ahí tu clave real de Google AI Studio.";
                 return;
             }
 
-            textbox.value = "Pensando descripción SEO...";
+            textbox.value = "⏳ Conectando con la IA de Gemini...\nGenerando descripción SEO premium, por favor espera unos segundos...";
             
             try {
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
@@ -488,17 +484,19 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         contents: [{ parts: [{ 
-                            text: "Actúa como un experto en copywriting de marcas de moda de lujo. Escribe una descripción de producto de 3 párrafos en español para: " + input + ". Usa un tono exclusivo, sofisticado y optimizado para SEO."
+                            text: "Actúa como un experto en copywriting de marcas de moda de lujo. Escribe una descripción de producto de 3 párrafos en español para: " + input + ". Usa un tono exclusivo, sofisticado y optimizado para SEO. No uses asteriscos ni formato markdown, solo texto plano con saltos de línea."
                         }]}]
                     })
                 });
 
+                if (!response.ok) throw new Error("Fallo en la respuesta de la API");
+
                 const data = await response.json();
                 textbox.value = data.candidates[0].content.parts[0].text;
+
             } catch (error) {
                 console.error(error);
-                textbox.value = "";
-                alert("Error al conectar con Gemini.");
+                textbox.value = "❌ ERROR DE CONEXIÓN: No se ha podido generar el texto.\n\nRevisa si la API Key que has puesto es correcta.";
             }
         }
     </script>
