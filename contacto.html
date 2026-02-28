@@ -16,14 +16,12 @@
             <img src="logo-header-2.png" alt="Curated Elegance" class="sub-logo">
             <p class="tagline">Premium Apparel & Exclusive Footwear</p>
         </div>
-        
         <nav class="top-nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="shop.html">Shop</a></li>
                 <li><a href="new-arrivals.html">New Arrivals</a></li>
                 <li><a href="contacto.html" class="active">Contact</a></li>
-                
                 <li id="menu-login"><a href="#" id="btn-open-login">Acceso</a></li>
                 <li id="menu-admin" style="display: none;"><a href="admin.html" class="admin-link">Panel Admin</a></li>
                 <li id="menu-logout" style="display: none;"><a href="#" id="btn-logout">Salir</a></li>
@@ -33,59 +31,50 @@
 
     <main class="white-section">
         <div class="contact-wrapper">
-            
             <div class="contact-form-container">
                 <h2 class="contact-title">Atención Personalizada</h2>
-                <p class="contact-desc">Para iniciar un pedido, consultar disponibilidad o solicitar asesoramiento de estilo, por favor complete el formulario. Nuestro equipo Concierge le atenderá a la mayor brevedad.</p>
+                <p class="contact-desc">Complete el formulario para iniciar su pedido exclusivo. Nuestro equipo Concierge le atenderá a la mayor brevedad.</p>
                 
-        <form action="https://formspree.io/f/meeldpzn" method="POST" class="luxury-form">
-            <input type="hidden" name="_next" value="https://luxurygoods26-web.vercel.app/gracias.html">
-            <input type="hidden" name="_subject" value="Nuevo Ticket de Luxury Goods">
-            <input type="hidden" name="_captcha" value="false">
-
-            <div class="form-group">
-                <label for="name">Nombre Completo</label>
-                <input type="text" name="name" id="name" placeholder="Ej. Alejandro Valdés" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Correo Electrónico</label>
-                <input type="email" name="email" id="email" placeholder="su@email.com" required>
-            </div>
-            <div class="form-group">
-                <label for="subject">Asunto</label>
-                <select name="subject" id="subject" required>
-                    <option value="">Seleccione un asunto...</option>
-                    <option value="Pre-order">Nuevo Pedido / Pre-order</option>
-                    <option value="Status">Estado de mi pedido</option>
-                    <option value="Consultancy">Asesoramiento de Estilo</option>
-                    <option value="Other">Otras consultas</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="message">Mensaje</label>
-                <textarea name="message" id="message" rows="5" placeholder="Indíquenos qué pieza busca..." required></textarea>
-            </div>
-            <button type="submit" class="btn-primary" style="width: 100%;">Enviar Mensaje</button>
-        </form>
+                <form id="luxury-contact-form" action="https://formspree.io/f/meeldpzn" method="POST" class="luxury-form">
+                    <div class="form-group">
+                        <label for="name">Nombre Completo</label>
+                        <input type="text" name="name" id="name" placeholder="Ej. Alejandro Valdés" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" name="email" id="email" placeholder="su@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Asunto</label>
+                        <select name="subject" id="subject" required>
+                            <option value="">Seleccione un asunto...</option>
+                            <option value="Pedido">Nuevo Pedido / Pre-order</option>
+                            <option value="Asesoramiento">Asesoramiento de Estilo</option>
+                            <option value="Otros">Otras consultas</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea name="message" id="message" rows="5" placeholder="¿En qué podemos ayudarle?" required></textarea>
+                    </div>
+                    <button type="submit" id="submit-button" class="btn-primary" style="width: 100%;">Enviar Mensaje</button>
+                    <p id="status-message" style="margin-top: 15px; font-size: 0.85rem; color: #C5A059; display: none;"></p>
+                </form>
             </div>
 
             <div class="contact-info-blocks">
                 <div class="info-block">
-                    <h3 class="info-title">Servicio Exclusivo Bajo Pedido</h3>
-                    <p>En Luxury Goods no disponemos de tienda física convencional. Operamos exclusivamente mediante <strong>pre-order (bajo previo pedido)</strong>. Esto nos permite garantizar la máxima calidad, evitar la sobreproducción y asegurar que cada pieza llega a su destinatario con el nivel de exclusividad que nos caracteriza.</p>
+                    <h3 class="info-title">Servicio Bajo Pedido</h3>
+                    <p>Operamos exclusivamente mediante <strong>pre-order</strong> para garantizar la máxima exclusividad.</p>
                 </div>
-                
                 <div class="info-block">
-                    <h3 class="info-title">Vías de Contacto Directo</h3>
-                    <p>Para una comunicación fluida y discreta, ponemos a su disposición nuestros canales cifrados:</p>
+                    <h3 class="info-title">Canales Directos</h3>
                     <div class="social-contact-links">
                         <p><strong>WhatsApp:</strong> <a href="https://wa.me/34600111222" target="_blank">+34 600 111 222</a></p>
                         <p><strong>Telegram:</strong> <a href="https://t.me/luxurygoods" target="_blank">@luxurygoods</a></p>
-                        <p><strong>Email:</strong> <a href="mailto:info@luxurygoods.com">info@luxurygoods.com</a></p>
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
 
@@ -93,81 +82,71 @@
         <div class="footer-grid">
             <div class="footer-col footer-links">
                 <h4>Colecciones</h4>
-                <ul>
-                    <li><a href="shop.html">Shop All</a></li>
-                    <li><a href="new-arrivals.html">Novedades</a></li>
-                    <li><a href="#">Ediciones Limitadas</a></li>
-                </ul>
+                <ul><li><a href="shop.html">Shop All</a></li><li><a href="new-arrivals.html">Novedades</a></li></ul>
             </div>
-            
             <div class="footer-col footer-brand-center">
                 <img src="logo-header.png" alt="Luxury Goods Logo" class="footer-logo">
                 <p class="footer-tagline">Premium Apparel</p>
             </div>
-            
             <div class="footer-col footer-contact">
                 <h4>Atención</h4>
-                <ul>
-                    <li><a href="contacto.html">Contacto</a></li>
-                    <li><a href="#">Envíos y Devoluciones</a></li>
-                    <li><a href="#">Guía de Tallas</a></li>
-                </ul>
+                <ul><li><a href="contacto.html">Contacto</a></li><li><a href="#">Guía de Tallas</a></li></ul>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Luxury Goods. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <div id="login-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:1000; display:none; justify-content:center; align-items:center;">
-        <div style="background:#1E1E1E; padding:35px; border-radius:8px; border:1px solid rgba(197, 160, 89, 0.3); text-align:center; max-width: 400px; width: 90%; font-family:'Montserrat', sans-serif;">
-            <h2 style="color:#C5A059; font-family:'Cinzel', serif; margin-bottom: 25px;">Acceso Exclusivo</h2>
-            <button id="btn-google" style="background:white; color:black; padding:12px 20px; border:none; border-radius:4px; cursor:pointer; width:100%; margin-bottom:20px; font-family:'Montserrat', sans-serif; font-weight:600; display:flex; align-items:center; justify-content:center; gap:10px;">
-                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width:18px;" alt="Google"> Continuar con Google
-            </button>
-            <p style="margin-bottom:20px; font-size:0.85rem; color:#888; text-transform:uppercase; letter-spacing:1px;">O con tu email</p>
-            <input type="email" id="login-email" placeholder="Correo electrónico" style="width:100%; padding:12px; margin-bottom:12px; background:#2A2A2A; color:white; border:1px solid #444; border-radius:4px; box-sizing:border-box; font-family:'Montserrat', sans-serif;">
-            <input type="password" id="login-pass" placeholder="Contraseña" style="width:100%; padding:12px; margin-bottom:25px; background:#2A2A2A; color:white; border:1px solid #444; border-radius:4px; box-sizing:border-box; font-family:'Montserrat', sans-serif;">
-            <button id="btn-email-login" style="background:transparent; color:#C5A059; padding:12px 20px; border:1px solid #C5A059; cursor:pointer; width:100%; transition:all 0.3s; font-family:'Montserrat', sans-serif; font-weight:600; text-transform:uppercase;">Iniciar Sesión</button>
-            <p id="btn-close-modal" style="margin-top:25px; color:#666; cursor:pointer; font-size:0.9rem; transition:color 0.3s;">Cerrar</p>
-        </div>
-    </div>
+    <script>
+        const form = document.getElementById("luxury-contact-form");
+        const status = document.getElementById("status-message");
+        const btn = document.getElementById("submit-button");
+
+        form.addEventListener("submit", async function(event) {
+            event.preventDefault();
+            btn.disabled = true;
+            status.style.display = "block";
+            status.innerHTML = "Procesando su solicitud...";
+
+            const data = new FormData(event.target);
+            
+            fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = "gracias.html";
+                } else {
+                    response.json().then(data => {
+                        status.innerHTML = "Error al enviar. Verifique su enlace de Formspree.";
+                        btn.disabled = false;
+                    });
+                }
+            }).catch(error => {
+                status.innerHTML = "Error de conexión.";
+                btn.disabled = false;
+            });
+        });
+    </script>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
         import { initializeFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
         const firebaseConfig = { apiKey: "AIzaSyAdWnW_eamYoki_qYd3huavNh5baxOJIRA", authDomain: "luxurygoods26.firebaseapp.com", projectId: "luxurygoods26", storageBucket: "luxurygoods26.firebasestorage.app", messagingSenderId: "603153460354", appId: "1:603153460354:web:97534032034721a8d4989b" };
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        const googleProvider = new GoogleAuthProvider();
         const db = initializeFirestore(app, { experimentalForceLongPolling: true });
-        const menuLogin = document.getElementById('menu-login');
-        const menuAdmin = document.getElementById('menu-admin');
-        const menuLogout = document.getElementById('menu-logout');
-        const loginModal = document.getElementById('login-modal');
-        const btnOpenLogin = document.getElementById('btn-open-login');
-        const btnCloseModal = document.getElementById('btn-close-modal');
-        const btnLogout = document.getElementById('btn-logout');
-        btnOpenLogin.addEventListener('click', (e) => { e.preventDefault(); loginModal.style.display = 'flex'; });
-        btnCloseModal.addEventListener('click', () => { loginModal.style.display = 'none'; });
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                loginModal.style.display = 'none'; menuLogin.style.display = 'none'; menuLogout.style.display = 'block';
+                document.getElementById('menu-login').style.display = 'none';
+                document.getElementById('menu-logout').style.display = 'block';
                 try {
-                    const docRef = doc(db, "usuarios", user.uid); const docSnap = await getDoc(docRef);
-                    if (docSnap.exists() && docSnap.data().rol === "admin") { menuAdmin.style.display = 'block'; } else { menuAdmin.style.display = 'none'; }
-                } catch (error) { console.error("Error:", error); }
-            } else { menuLogin.style.display = 'block'; menuAdmin.style.display = 'none'; menuLogout.style.display = 'none'; }
+                    const docRef = doc(db, "usuarios", user.uid);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists() && docSnap.data().rol === "admin") { document.getElementById('menu-admin').style.display = 'block'; }
+                } catch (e) {}
+            }
         });
-        document.getElementById('btn-email-login').addEventListener('click', () => {
-            const email = document.getElementById('login-email').value; const pass = document.getElementById('login-pass').value;
-            if(!email || !pass) return alert("Por favor, rellena ambos campos.");
-            signInWithEmailAndPassword(auth, email, pass).then(() => { loginModal.style.display = 'none'; document.getElementById('login-email').value = ""; document.getElementById('login-pass').value = ""; window.scrollTo({ top: 0, behavior: 'smooth' }); }).catch((error) => alert("Error al iniciar sesión."));
-        });
-        document.getElementById('btn-google').addEventListener('click', () => {
-            signInWithPopup(auth, googleProvider).then(() => { loginModal.style.display = 'none'; window.scrollTo({ top: 0, behavior: 'smooth' }); }).catch((error) => { if (error.code !== 'auth/popup-closed-by-user') { alert("Error Google."); } });
-        });
-        btnLogout.addEventListener('click', (e) => { e.preventDefault(); signOut(auth).then(() => { window.location.reload(); }); });
     </script>
 </body>
 </html>
