@@ -7,7 +7,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: var(--font-sans); background-color: #FAFAFA; } /* Fondo suave para toda la web */
+body { font-family: var(--font-sans); background-color: #FAFAFA; }
 
 /* --- CABECERA DE MÁRMOL --- */
 .marble-header {
@@ -403,6 +403,18 @@ body { font-family: var(--font-sans); background-color: #FAFAFA; } /* Fondo suav
     line-height: 1.8;
     font-size: 0.95rem;
     margin-bottom: 0.5rem;
+}
+
+/* Estilos para los enlaces de redes (WhatsApp/Telegram) */
+.social-contact-links a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.social-contact-links a:hover {
+    color: var(--gold);
 }
 
 /* =======================================================
