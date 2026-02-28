@@ -284,40 +284,75 @@ body { font-family: var(--font-sans); background-color: #FAFAFA; }
 .admin-link { color: var(--gold) !important; font-weight: bold; }
 
 /* =======================================================
-   REGLAS RESPONSIVE (MÓVILES Y TABLETS)
+   REGLAS RESPONSIVE (MAGIA PARA MÓVILES - IPHONE / ANDROID)
 ======================================================= */
 @media (max-width: 992px) {
+    /* TABLETS (iPad, etc.) */
     .featured-product { gap: 3rem; }
     .product-title { font-size: 2.2rem; }
-    .white-section { padding: 6rem 5%; }
+    .white-section { padding: 5rem 5%; }
     .contact-wrapper { flex-direction: column; gap: 4rem; }
     .contact-form-container { width: 100%; }
     .footer-grid { gap: 2rem; }
 }
 
 @media (max-width: 768px) {
-    .top-nav ul { flex-direction: column; gap: 1.2rem; margin-bottom: 0; }
-    .main-logo { height: 110px !important; }
-    .sub-logo { height: 15px; } 
-    .tagline { font-size: 0.75rem; padding: 0 10px; }
+    /* SMARTPHONES (iPhone, Android) */
     
-    .featured-product { flex-direction: column; text-align: center; gap: 3rem; }
-    .product-info-container { padding-right: 0; text-align: center; display: flex; flex-direction: column; align-items: center; }
-    .product-title { font-size: 2rem; }
-    .product-description { max-width: 100%; font-size: 1rem; }
+    /* 1. Cabecera más compacta y refinada */
+    .marble-header { padding: 1.5rem 0 0 0; }
+    .main-logo { height: 75px !important; } /* Tamaño joya, elegante y no intrusivo */
+    .sub-logo { height: 12px; margin-bottom: 0.8rem; } 
+    .tagline { font-size: 0.65rem; padding: 0 10px; letter-spacing: 1px; }
     
-    .hero-title { font-size: 2.5rem; }
-    .hero-buttons { flex-direction: column; }
-    .brand-pillars-section { flex-direction: column; gap: 3rem; }
+    /* 2. Menú distribuido en línea con wrap, no apilado */
+    .top-nav ul { 
+        flex-direction: row; 
+        flex-wrap: wrap; 
+        gap: 0.8rem 1.5rem; 
+        padding: 0 15px 15px 15px; 
+        margin-bottom: 0;
+    }
+    .top-nav a { font-size: 0.75rem; letter-spacing: 1px; padding-bottom: 4px; }
 
+    /* 3. Reducción drástica de los espacios en blanco gigantes */
+    .white-section { padding: 3.5rem 5%; }
+    .hero-section { padding: 4rem 5%; }
+    .brand-pillars-section { padding: 4rem 5%; flex-direction: column; gap: 3.5rem; }
+    
+    /* 4. Textos y botones adaptados a la lectura móvil */
+    .hero-title { font-size: 2.3rem; margin-bottom: 1rem; }
+    .hero-subtitle { font-size: 1rem; line-height: 1.5; margin-bottom: 2rem; }
+    
+    .hero-buttons { flex-direction: column; width: 100%; gap: 1rem; }
+    .btn-primary, .btn-secondary { width: 100%; text-align: center; padding: 14px 20px; font-size: 0.85rem; }
+
+    /* 5. Shop Home - Producto destacado */
+    .featured-product { flex-direction: column; text-align: center; gap: 2.5rem; }
+    .product-info-container { padding-right: 0; display: flex; flex-direction: column; align-items: center; }
+    .crown-icon-wrapper { margin-bottom: 1rem; padding: 12px; }
+    .product-title { font-size: 2rem; }
+    .product-description { font-size: 0.95rem; line-height: 1.6; }
+
+    /* 6. Contacto */
+    .contact-form-container { padding: 2rem 1.2rem; }
+    .contact-title { font-size: 1.8rem; text-align: center; }
+    .contact-desc { text-align: center; font-size: 0.9rem; }
+    .signature-text { font-size: 2.8rem; margin-top: 1rem; }
+
+    /* 7. New Arrivals */
+    .arrivals-container { padding: 2rem 5% 3rem 5%; }
+    .arrivals-title { font-size: 2.2rem; }
+    .arrivals-subtitle { font-size: 0.95rem; margin-bottom: 3rem; line-height: 1.5; }
+    .arrivals-grid { grid-template-columns: 1fr; gap: 4rem; }
+    .arrival-image { height: 350px; margin-bottom: 1.5rem; } /* Altura controlada para móvil */
+    .arrival-info { padding: 0 5%; }
+    .arrival-info h3 { font-size: 1.5rem; }
+
+    /* 8. Footer recogido */
     .marble-footer { padding: 3rem 5% 2rem 5%; }
-    .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; border-bottom: none; padding-bottom: 1rem; }
+    .footer-brand-center { padding: 0; margin-bottom: 0; order: -1; } /* Sube el logo arriba del todo en móvil */
+    .footer-logo { height: 75px; }
     .footer-links, .footer-contact { text-align: center; }
-    .footer-brand-center { padding: 0; margin-bottom: 1rem; }
-    
-    .contact-form-container { padding: 2rem 1.5rem; }
-    .signature-text { font-size: 2.5rem; }
-    
-    .arrivals-grid { grid-template-columns: 1fr; }
-    .arrival-image { height: 400px; }
 }
