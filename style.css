@@ -16,10 +16,30 @@ body { font-family: var(--font-sans); }
     background-image: linear-gradient(rgba(20, 20, 20, 0.8), rgba(20, 20, 20, 0.8)), url('marmol.png');
     background-size: cover;
     background-position: center;
-    padding: 1.5rem 0 2rem 0; /* Menos espacio muerto */
+    padding: 1.5rem 0 0 0; /* Quitamos todo el padding de abajo */
     text-align: center;
     color: var(--text-on-marble);
     border-bottom: 3px solid var(--gold); 
+}
+
+/* Logo y Tagline en la cabecera */
+.logo-container {
+    margin-bottom: 1.5rem; /* Separación con el menú */
+}
+
+.main-logo {
+    height: 100px !important; /* Más fino todavía */
+    width: auto;
+    margin-bottom: 0.3rem;
+}
+
+.tagline {
+    font-family: var(--font-serif);
+    color: var(--gold);
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    opacity: 0.9;
+    text-transform: uppercase;
 }
 
 /* Navegación superior */
@@ -27,39 +47,24 @@ body { font-family: var(--font-sans); }
     list-style: none;
     display: flex;
     justify-content: center;
-    gap: 3.5rem; /* Más espacio entre opciones */
-    margin-bottom: 1.5rem;
+    gap: 3.5rem; 
+    margin-bottom: 0; /* Eliminamos el margen inferior para que se pegue a la línea dorada */
 }
 
 .top-nav a {
     text-decoration: none;
     color: var(--text-on-marble);
     text-transform: uppercase;
-    letter-spacing: 3px; /* Letras separadas para aspecto premium */
+    letter-spacing: 3px; 
     font-size: 0.85rem;
-    padding-bottom: 5px;
+    padding-bottom: 15px; /* Espacio para la línea de subrayado */
     transition: color 0.3s, border-bottom 0.3s;
+    border-bottom: 3px solid transparent; /* Línea invisible por defecto */
 }
 
 .top-nav a:hover, .top-nav a.active {
     color: var(--gold);
-    border-bottom: 1px solid var(--gold); 
-}
-
-/* Logo y Tagline en la cabecera */
-.main-logo {
-    height: 120px !important; /* Tamaño contenido y elegante */
-    width: auto;
-    margin-bottom: 0.5rem;
-}
-
-.tagline {
-    font-family: var(--font-serif);
-    color: var(--gold);
-    letter-spacing: 2px;
-    font-size: 0.85rem;
-    opacity: 0.9;
-    text-transform: uppercase;
+    border-bottom: 3px solid var(--gold); /* Línea dorada más gruesa y pegada al borde inferior */
 }
 
 /* --- SECCIÓN CENTRAL BLANCA (Shop / Base) --- */
@@ -324,7 +329,7 @@ body { font-family: var(--font-sans); }
     .top-nav ul {
         flex-direction: column; 
         gap: 1.2rem;
-        margin-bottom: 2rem;
+        margin-bottom: 0;
     }
     .main-logo { height: 80px !important; } /* Aún más recogido en móvil */
     .tagline {

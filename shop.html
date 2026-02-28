@@ -10,7 +10,12 @@
 </head>
 <body>
 
-    <header class="marble-header" style="padding-bottom: 2rem;">
+    <header class="marble-header">
+        <div class="logo-container">
+            <img src="logo.png" alt="Luxury Goods Logo" class="main-logo">
+            <p class="tagline">Premium Apparel & Exclusive Footwear</p>
+        </div>
+        
         <nav class="top-nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -19,15 +24,10 @@
                 <li><a href="contacto.html">Contact</a></li>
                 
                 <li id="menu-login"><a href="#" id="btn-open-login">Acceso</a></li>
-                <li id="menu-admin" style="display: none;"><a href="admin.html" style="color: #C5A059; font-weight: bold;">Panel Admin</a></li>
+                <li id="menu-admin" style="display: none;"><a href="admin.html" class="admin-link">Panel Admin</a></li>
                 <li id="menu-logout" style="display: none;"><a href="#" id="btn-logout">Salir</a></li>
             </ul>
         </nav>
-        
-        <div class="logo-container">
-            <img src="logo.png" alt="Luxury Goods Logo" class="main-logo" style="height: 250px;">
-            <p class="tagline">Premium Apparel & Exclusive Footwear</p>
-        </div>
     </header>
 
     <main class="white-section">
@@ -46,32 +46,32 @@
     </main>
 
     <footer class="marble-footer">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <img src="logo.png" alt="Luxury Goods Logo" class="footer-logo">
-                    <p class="footer-tagline">Premium Apparel & Exclusive Footwear</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Colecciones</h4>
-                    <ul>
-                        <li><a href="shop.html">Shop All</a></li>
-                        <li><a href="new-arrivals.html">Novedades</a></li>
-                        <li><a href="#">Ediciones Limitadas</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <h4>Atención al Cliente</h4>
-                    <ul>
-                        <li><a href="contacto.html">Contacto</a></li>
-                        <li><a href="#">Envíos y Devoluciones</a></li>
-                        <li><a href="#">Guía de Tallas</a></li>
-                    </ul>
-                </div>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="logo.png" alt="Luxury Goods Logo" class="footer-logo">
+                <p class="footer-tagline">Premium Apparel & Exclusive Footwear</p>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Luxury Goods. Todos los derechos reservados.</p>
+            <div class="footer-links">
+                <h4>Colecciones</h4>
+                <ul>
+                    <li><a href="shop.html">Shop All</a></li>
+                    <li><a href="new-arrivals.html">Novedades</a></li>
+                    <li><a href="#">Ediciones Limitadas</a></li>
+                </ul>
             </div>
-        </footer>
+            <div class="footer-contact">
+                <h4>Atención al Cliente</h4>
+                <ul>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="#">Envíos y Devoluciones</a></li>
+                    <li><a href="#">Guía de Tallas</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Luxury Goods. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
     <div id="login-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:1000; display:none; justify-content:center; align-items:center;">
         <div style="background:#1E1E1E; padding:35px; border-radius:8px; border:1px solid rgba(197, 160, 89, 0.3); text-align:center; max-width: 400px; width: 90%; font-family:'Montserrat', sans-serif;">
