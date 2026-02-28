@@ -10,7 +10,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: var(--font-sans); }
 
-/* --- CABECERA DE MÁRMOL (Proporciones aumentadas) --- */
+/* --- CABECERA DE MÁRMOL (Proporciones corregidas) --- */
 .marble-header {
     background-color: #151515;
     background-image: linear-gradient(rgba(20, 20, 20, 0.8), rgba(20, 20, 20, 0.8)), url('marmol.png');
@@ -28,7 +28,7 @@ body { font-family: var(--font-sans); }
 }
 
 .main-logo {
-    height: 160px !important; /* ¡Mucho más imponente! */
+    height: 160px !important; /* imponente */
     width: auto;
     margin-bottom: 0.8rem;
 }
@@ -36,8 +36,9 @@ body { font-family: var(--font-sans); }
 .tagline {
     font-family: var(--font-serif);
     color: var(--gold);
-    letter-spacing: 3px; /* Más espaciado */
-    font-size: 0.95rem; /* Más grande */
+    letter-spacing: 1.5px; /* Reducido para mejor legibilidad */
+    font-size: 1.25rem; /* ¡Mucho más grande y legible! */
+    font-weight: bold; /* Más cuerpo */
     opacity: 0.9;
     text-transform: uppercase;
 }
@@ -56,7 +57,7 @@ body { font-family: var(--font-sans); }
     color: var(--text-on-marble);
     text-transform: uppercase;
     letter-spacing: 3px; 
-    font-size: 1rem; /* Textos de menú más grandes y legibles */
+    font-size: 1rem; /* Textos de menú grandes y legibles */
     padding-bottom: 15px; 
     transition: color 0.3s, border-bottom 0.3s;
     border-bottom: 3px solid transparent; 
@@ -132,7 +133,7 @@ body { font-family: var(--font-sans); }
     max-width: 500px; 
 }
 
-/* --- FOOTER DE MÁRMOL (Proporciones aumentadas) --- */
+/* --- FOOTER DE MÁRMOL (Alineación corregida a la izquierda) --- */
 .marble-footer {
     background-color: #151515;
     background-image: linear-gradient(rgba(20, 20, 20, 0.8), rgba(20, 20, 20, 0.8)), url('marmol.png');
@@ -145,21 +146,22 @@ body { font-family: var(--font-sans); }
 
 .footer-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* Estructura explícita: más peso al logo, columnas uniformes para enlaces */
+    grid-template-columns: 2fr 1fr 1fr; 
     gap: 3rem;
     max-width: 1200px;
     margin: 0 auto;
-    text-align: left;
+    text-align: left; /* Todo alineado a la izquierda para lujo contemporáneo */
     border-bottom: 1px solid rgba(197, 160, 89, 0.2);
     padding-bottom: 3rem;
 }
 
 .footer-brand {
-    text-align: center;
+    text-align: left; /* Alineación corregida */
 }
 
 .footer-logo {
-    height: 120px; /* Logo del pie de página más grande */
+    height: 140px; /* Logo del pie de página más grande para balancear alineación */
     width: auto;
     margin-bottom: 1rem;
 }
@@ -318,7 +320,11 @@ body { font-family: var(--font-sans); }
     .featured-product { gap: 3rem; }
     .product-title { font-size: 2.2rem; }
     .white-section { padding: 6rem 5%; }
-    .footer-grid { text-align: center; } 
+    .footer-grid { 
+        text-align: left; 
+        grid-template-columns: 1fr 1fr; /* Logo arriba, enlaces abajo en tablet */
+    } 
+    .footer-brand { grid-column: 1 / -1; margin-bottom: 2rem;}
 }
 
 @media (max-width: 768px) {
@@ -329,7 +335,7 @@ body { font-family: var(--font-sans); }
     }
     .main-logo { height: 100px !important; } /* Un poco más grande también en móvil */
     .tagline {
-        font-size: 0.85rem;
+        font-size: 1rem; /* Proporcional en móvil */
         padding: 0 10px;
     }
     
@@ -360,4 +366,5 @@ body { font-family: var(--font-sans); }
         grid-template-columns: 1fr;
         gap: 2rem;
     }
+    .footer-brand { grid-column: 1; text-align: left;}
 }
