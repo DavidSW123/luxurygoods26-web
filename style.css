@@ -10,13 +10,13 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: var(--font-sans); }
 
-/* --- CABECERA DE MÁRMOL (Refinada Lujo Minimalista) --- */
+/* --- CABECERA DE MÁRMOL (Proporciones aumentadas) --- */
 .marble-header {
     background-color: #151515;
     background-image: linear-gradient(rgba(20, 20, 20, 0.8), rgba(20, 20, 20, 0.8)), url('marmol.png');
     background-size: cover;
     background-position: center;
-    padding: 1.5rem 0 0 0; /* Quitamos todo el padding de abajo */
+    padding: 2.5rem 0 0 0; /* Un poco más de aire arriba */
     text-align: center;
     color: var(--text-on-marble);
     border-bottom: 3px solid var(--gold); 
@@ -24,20 +24,20 @@ body { font-family: var(--font-sans); }
 
 /* Logo y Tagline en la cabecera */
 .logo-container {
-    margin-bottom: 1.5rem; /* Separación con el menú */
+    margin-bottom: 2rem; 
 }
 
 .main-logo {
-    height: 100px !important; /* Más fino todavía */
+    height: 160px !important; /* ¡Mucho más imponente! */
     width: auto;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.8rem;
 }
 
 .tagline {
     font-family: var(--font-serif);
     color: var(--gold);
-    letter-spacing: 2px;
-    font-size: 0.8rem;
+    letter-spacing: 3px; /* Más espaciado */
+    font-size: 0.95rem; /* Más grande */
     opacity: 0.9;
     text-transform: uppercase;
 }
@@ -48,7 +48,7 @@ body { font-family: var(--font-sans); }
     display: flex;
     justify-content: center;
     gap: 3.5rem; 
-    margin-bottom: 0; /* Eliminamos el margen inferior para que se pegue a la línea dorada */
+    margin-bottom: 0; 
 }
 
 .top-nav a {
@@ -56,15 +56,15 @@ body { font-family: var(--font-sans); }
     color: var(--text-on-marble);
     text-transform: uppercase;
     letter-spacing: 3px; 
-    font-size: 0.85rem;
-    padding-bottom: 15px; /* Espacio para la línea de subrayado */
+    font-size: 1rem; /* Textos de menú más grandes y legibles */
+    padding-bottom: 15px; 
     transition: color 0.3s, border-bottom 0.3s;
-    border-bottom: 3px solid transparent; /* Línea invisible por defecto */
+    border-bottom: 3px solid transparent; 
 }
 
 .top-nav a:hover, .top-nav a.active {
     color: var(--gold);
-    border-bottom: 3px solid var(--gold); /* Línea dorada más gruesa y pegada al borde inferior */
+    border-bottom: 3px solid var(--gold); 
 }
 
 /* --- SECCIÓN CENTRAL BLANCA (Shop / Base) --- */
@@ -132,7 +132,7 @@ body { font-family: var(--font-sans); }
     max-width: 500px; 
 }
 
-/* --- FOOTER DE MÁRMOL (Nuevo diseño SEO 3 Columnas) --- */
+/* --- FOOTER DE MÁRMOL (Proporciones aumentadas) --- */
 .marble-footer {
     background-color: #151515;
     background-image: linear-gradient(rgba(20, 20, 20, 0.8), rgba(20, 20, 20, 0.8)), url('marmol.png');
@@ -159,14 +159,14 @@ body { font-family: var(--font-sans); }
 }
 
 .footer-logo {
-    height: 80px; 
+    height: 120px; /* Logo del pie de página más grande */
     width: auto;
     margin-bottom: 1rem;
 }
 
 .footer-tagline {
     color: var(--gold);
-    font-size: 0.85rem;
+    font-size: 1rem; /* Más grande */
     letter-spacing: 1px;
     font-family: var(--font-serif);
 }
@@ -176,20 +176,20 @@ body { font-family: var(--font-sans); }
     font-family: var(--font-serif);
     margin-bottom: 1.5rem;
     letter-spacing: 2px;
-    font-size: 1.1rem;
+    font-size: 1.2rem; /* Títulos más grandes */
 }
 
 .footer-links ul, .footer-contact ul {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 1rem; /* Más aire entre enlaces */
 }
 
 .footer-links a, .footer-contact a {
     color: #ccc;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1rem; /* Enlaces más legibles */
     transition: color 0.3s;
 }
 
@@ -200,7 +200,7 @@ body { font-family: var(--font-sans); }
 .footer-bottom {
     margin-top: 2rem;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     opacity: 0.6;
 }
 
@@ -310,34 +310,29 @@ body { font-family: var(--font-sans); }
     font-size: 0.95rem;
 }
 
-
 /* =======================================================
    REGLAS RESPONSIVE (MAGIA PARA MÓVILES Y TABLETS)
 ======================================================= */
 
-/* Para Tablets y pantallas medianas (hasta 992px) */
 @media (max-width: 992px) {
     .featured-product { gap: 3rem; }
     .product-title { font-size: 2.2rem; }
     .white-section { padding: 6rem 5%; }
-    .footer-grid { text-align: center; } /* Footer centrado en tablet */
+    .footer-grid { text-align: center; } 
 }
 
-/* Para Móviles (hasta 768px) */
 @media (max-width: 768px) {
-    /* Ajustes del Menú y Logo */
     .top-nav ul {
         flex-direction: column; 
         gap: 1.2rem;
         margin-bottom: 0;
     }
-    .main-logo { height: 80px !important; } /* Aún más recogido en móvil */
+    .main-logo { height: 100px !important; } /* Un poco más grande también en móvil */
     .tagline {
-        font-size: 0.75rem;
+        font-size: 0.85rem;
         padding: 0 10px;
     }
     
-    /* Ajustes de la sección central (Shop) */
     .featured-product {
         flex-direction: column; 
         text-align: center; 
@@ -356,12 +351,10 @@ body { font-family: var(--font-sans); }
         font-size: 1rem;
     }
     
-    /* Ajustes de la Nueva Home */
     .hero-title { font-size: 2.5rem; }
     .hero-buttons { flex-direction: column; }
     .brand-pillars-section { flex-direction: column; gap: 3rem; }
 
-    /* Ajustes del Footer */
     .marble-footer { padding: 3rem 5% 2rem 5%; }
     .footer-grid {
         grid-template-columns: 1fr;
