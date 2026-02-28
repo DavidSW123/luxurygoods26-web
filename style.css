@@ -7,15 +7,15 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: var(--font-sans); }
+body { font-family: var(--font-sans); background-color: #FAFAFA; } /* Fondo suave para toda la web */
 
-/* --- CABECERA DE MÁRMOL (Ajustes de Proporción definitivos) --- */
+/* --- CABECERA DE MÁRMOL --- */
 .marble-header {
     background-color: #151515;
     background-image: linear-gradient(rgba(20, 20, 20, 0.8), rgba(20, 20, 20, 0.8)), url('marmol.png');
     background-size: cover;
     background-position: center;
-    padding: 2rem 0 0 0; 
+    padding: 2.5rem 0 0 0; 
     text-align: center;
     color: var(--text-on-marble);
     border-bottom: 3px solid var(--gold); 
@@ -28,16 +28,14 @@ body { font-family: var(--font-sans); }
     align-items: center;
 }
 
-/* Logo principal corona (Reducido para no comer pantalla) */
 .main-logo {
-    height: 150px !important; /* Equilibrio: tiene presencia pero no es gigante */
+    height: 150px !important; 
     width: auto;
     margin-bottom: 0.5rem;
 }
 
-/* Imagen secundaria del texto curado (Aumentado para legibilidad) */
 .sub-logo {
-    height: 25px; /* ¡Ahora sí se lee el "Curated Elegance"! */
+    height: 25px; 
     width: auto;
     margin-bottom: 1.5rem;
 }
@@ -140,7 +138,7 @@ body { font-family: var(--font-sans); }
     max-width: 500px; 
 }
 
-/* --- FOOTER DE MÁRMOL (Nuevo Diseño Simétrico Centrado) --- */
+/* --- FOOTER DE MÁRMOL --- */
 .marble-footer {
     background-color: #151515;
     background-image: linear-gradient(rgba(20, 20, 20, 0.8), rgba(20, 20, 20, 0.8)), url('marmol.png');
@@ -153,12 +151,11 @@ body { font-family: var(--font-sans); }
 
 .footer-grid {
     display: grid;
-    /* 3 columnas equilibradas: Enlaces | Logo | Enlaces */
     grid-template-columns: 1fr auto 1fr;
     gap: 4rem;
     max-width: 1200px;
     margin: 0 auto;
-    align-items: center; /* Alineación vertical perfecta */
+    align-items: center; 
     border-bottom: 1px solid rgba(197, 160, 89, 0.2);
     padding-bottom: 3rem;
 }
@@ -168,12 +165,8 @@ body { font-family: var(--font-sans); }
     flex-direction: column;
 }
 
-/* Columna Izquierda (Alineada a la derecha contra el logo) */
-.footer-links {
-    text-align: right;
-}
+.footer-links { text-align: right; }
 
-/* Columna Central (Logo centrado y majestuoso) */
 .footer-brand-center {
     text-align: center;
     display: flex;
@@ -183,7 +176,7 @@ body { font-family: var(--font-sans); }
 }
 
 .footer-logo {
-    height: 100px; /* Más pequeño que el header, pero totalmente legible */
+    height: 100px; 
     width: auto;
     margin-bottom: 0.5rem;
 }
@@ -196,10 +189,7 @@ body { font-family: var(--font-sans); }
     text-transform: uppercase;
 }
 
-/* Columna Derecha (Alineada a la izquierda contra el logo) */
-.footer-contact {
-    text-align: left;
-}
+.footer-contact { text-align: left; }
 
 .footer-col h4 {
     color: var(--gold);
@@ -223,9 +213,7 @@ body { font-family: var(--font-sans); }
     transition: color 0.3s;
 }
 
-.footer-col a:hover {
-    color: var(--gold);
-}
+.footer-col a:hover { color: var(--gold); }
 
 .footer-bottom {
     margin-top: 2rem;
@@ -233,12 +221,6 @@ body { font-family: var(--font-sans); }
     font-size: 0.85rem;
     opacity: 0.6;
 }
-
-/* =======================================================
-   CLASES UTILITARIAS PARA FIREBASE
-======================================================= */
-.hidden { display: none !important; }
-.admin-link { color: var(--gold) !important; font-weight: bold; }
 
 /* =======================================================
    NUEVA HOME (MARKETING & SEO)
@@ -282,6 +264,7 @@ body { font-family: var(--font-sans); }
     letter-spacing: 1px;
     transition: all 0.3s;
     border: 1px solid var(--gold);
+    cursor: pointer;
 }
 
 .btn-primary:hover {
@@ -335,6 +318,100 @@ body { font-family: var(--font-sans); }
 }
 
 /* =======================================================
+   NUEVA PÁGINA DE CONTACTO (FORMULARIO PREMIUM)
+======================================================= */
+.contact-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    width: 100%;
+    gap: 5rem;
+}
+
+.contact-form-container {
+    flex: 1.5;
+    background-color: #FAFAFA;
+    padding: 3rem;
+    border: 1px solid rgba(197, 160, 89, 0.2);
+}
+
+.contact-title {
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    color: var(--text-on-white);
+    margin-bottom: 1rem;
+}
+
+.contact-desc {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+}
+
+.luxury-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.luxury-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.luxury-form input, 
+.luxury-form select, 
+.luxury-form textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #CCC;
+    background-color: #FFF;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+.luxury-form input:focus, 
+.luxury-form select:focus, 
+.luxury-form textarea:focus {
+    border-color: var(--gold);
+    outline: none;
+}
+
+.contact-info-blocks {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.info-block .info-title {
+    font-family: var(--font-serif);
+    color: var(--gold);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.info-block p {
+    color: #555;
+    line-height: 1.8;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+/* =======================================================
+   CLASES UTILITARIAS PARA FIREBASE
+======================================================= */
+.hidden { display: none !important; }
+.admin-link { color: var(--gold) !important; font-weight: bold; }
+
+/* =======================================================
    REGLAS RESPONSIVE (MAGIA PARA MÓVILES Y TABLETS)
 ======================================================= */
 @media (max-width: 992px) {
@@ -342,9 +419,10 @@ body { font-family: var(--font-sans); }
     .product-title { font-size: 2.2rem; }
     .white-section { padding: 6rem 5%; }
     
-    .footer-grid {
-        gap: 2rem;
-    }
+    .contact-wrapper { flex-direction: column; gap: 4rem; }
+    .contact-form-container { width: 100%; }
+    
+    .footer-grid { gap: 2rem; }
 }
 
 @media (max-width: 768px) {
@@ -353,8 +431,8 @@ body { font-family: var(--font-sans); }
         gap: 1.2rem;
         margin-bottom: 0;
     }
-    .main-logo { height: 110px !important; } /* Un poco más contenido en móvil */
-    .sub-logo { height: 15px; } /* Ajuste de legibilidad móvil */
+    .main-logo { height: 110px !important; }
+    .sub-logo { height: 15px; } 
     .tagline {
         font-size: 0.75rem;
         padding: 0 10px;
@@ -373,27 +451,20 @@ body { font-family: var(--font-sans); }
         align-items: center; 
     }
     .product-title { font-size: 2rem; }
-    .product-description {
-        max-width: 100%;
-        font-size: 1rem;
-    }
+    .product-description { max-width: 100%; font-size: 1rem; }
     
     .hero-title { font-size: 2.5rem; }
     .hero-buttons { flex-direction: column; }
     .brand-pillars-section { flex-direction: column; gap: 3rem; }
 
-    /* Footer Responsive: Volvemos a columna apilada para móvil */
     .marble-footer { padding: 3rem 5% 2rem 5%; }
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 2.5rem;
         text-align: center;
     }
-    .footer-links, .footer-contact {
-        text-align: center;
-    }
-    .footer-brand-center {
-        padding: 0;
-        margin-bottom: 1rem;
-    }
+    .footer-links, .footer-contact { text-align: center; }
+    .footer-brand-center { padding: 0; margin-bottom: 1rem; }
+    
+    .contact-form-container { padding: 2rem 1.5rem; }
 }
