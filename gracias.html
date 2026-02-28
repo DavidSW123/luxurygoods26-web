@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contacte con Luxury Goods. Servicio Concierge y asesoramiento personalizado para pedidos exclusivos.">
-    <title>Contacto | Luxury Goods</title>
+    <title>Gracias | Luxury Goods</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
@@ -21,7 +20,7 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="shop.html">Shop</a></li>
                 <li><a href="new-arrivals.html">New Arrivals</a></li>
-                <li><a href="contacto.html" class="active">Contact</a></li>
+                <li><a href="contacto.html">Contact</a></li>
                 <li id="menu-login"><a href="#" id="btn-open-login">Acceso</a></li>
                 <li id="menu-admin" style="display: none;"><a href="admin.html" class="admin-link">Panel Admin</a></li>
                 <li id="menu-logout" style="display: none;"><a href="#" id="btn-logout">Salir</a></li>
@@ -29,52 +28,16 @@
         </nav>
     </header>
 
-    <main class="white-section">
-        <div class="contact-wrapper">
-            <div class="contact-form-container">
-                <h2 class="contact-title">Atención Personalizada</h2>
-                <p class="contact-desc">Complete el formulario para iniciar su pedido exclusivo. Nuestro equipo Concierge le atenderá a la mayor brevedad.</p>
-                
-                <form id="luxury-contact-form" action="https://formspree.io/f/meeldpzn" method="POST" class="luxury-form">
-                    <div class="form-group">
-                        <label for="name">Nombre Completo</label>
-                        <input type="text" name="name" id="name" placeholder="Ej. Alejandro Valdés" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Correo Electrónico</label>
-                        <input type="email" name="email" id="email" placeholder="su@email.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Asunto</label>
-                        <select name="subject" id="subject" required>
-                            <option value="">Seleccione un asunto...</option>
-                            <option value="Pedido">Nuevo Pedido / Pre-order</option>
-                            <option value="Asesoramiento">Asesoramiento de Estilo</option>
-                            <option value="Otros">Otras consultas</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Mensaje</label>
-                        <textarea name="message" id="message" rows="5" placeholder="¿En qué podemos ayudarle?" required></textarea>
-                    </div>
-                    <button type="submit" id="submit-button" class="btn-primary" style="width: 100%;">Enviar Mensaje</button>
-                    <p id="status-message" style="margin-top: 15px; font-size: 0.85rem; color: var(--gold); display: none;">Enviando...</p>
-                </form>
-            </div>
-
-            <div class="contact-info-blocks">
-                <div class="info-block">
-                    <h3 class="info-title">Servicio Bajo Pedido</h3>
-                    <p>Operamos exclusivamente mediante <strong>pre-order</strong> para garantizar la máxima exclusividad.</p>
-                </div>
-                <div class="info-block">
-                    <h3 class="info-title">Canales Directos</h3>
-                    <div class="social-contact-links">
-                        <p><strong>WhatsApp:</strong> <a href="https://wa.me/34600111222" target="_blank">+34 600 111 222</a></p>
-                        <p><strong>Telegram:</strong> <a href="https://t.me/luxurygoods" target="_blank">@luxurygoods</a></p>
-                    </div>
-                </div>
-            </div>
+    <main class="white-section" style="min-height: 60vh;">
+        <div class="thank-you-container" style="text-align: center; max-width: 700px; margin: 0 auto; padding: 4rem 1rem;">
+            <h1 class="hero-title" style="font-size: 3rem; margin-bottom: 1.5rem;">Solicitud Recibida</h1>
+            <p class="hero-subtitle" style="font-size: 1.2rem; margin-bottom: 3rem; color: #555;">
+                Le agradecemos su interés. Nuestro equipo Concierge está revisando su solicitud y se pondrá en contacto con usted a la mayor brevedad posible para ofrecerle un servicio a su medida.
+            </p>
+            
+            <p class="signature-text">Atentamente,<br>El equipo de Luxury Goods</p>
+            
+            <a href="index.html" class="btn-primary" style="display: inline-block; margin-top: 4rem;">Volver al Inicio</a>
         </div>
     </main>
 
@@ -93,65 +56,7 @@
                 <ul><li><a href="contacto.html">Contacto</a></li><li><a href="#">Guía de Tallas</a></li></ul>
             </div>
         </div>
+        <div class="footer-bottom"><p>&copy; 2026 Luxury Goods. Reservados todos los derechos.</p></div>
     </footer>
-
-    <script>
-        const form = document.getElementById("luxury-contact-form");
-        const status = document.getElementById("status-message");
-        const btn = document.getElementById("submit-button");
-
-        form.addEventListener("submit", async function(event) {
-            event.preventDefault();
-            btn.disabled = true;
-            status.style.display = "block";
-            status.innerHTML = "Procesando su solicitud...";
-
-            const data = new FormData(event.target);
-            
-            fetch(event.target.action, {
-                method: form.method,
-                body: data,
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if (response.ok) {
-                    // REDIRECCIÓN EXITOSA
-                    window.location.href = "gracias.html";
-                } else {
-                    response.json().then(data => {
-                        if (Object.hasOwn(data, 'errors')) {
-                            status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
-                        } else {
-                            status.innerHTML = "Error al enviar. Inténtelo de nuevo.";
-                        }
-                        btn.disabled = false;
-                    });
-                }
-            }).catch(error => {
-                status.innerHTML = "Error de conexión. Revise su red.";
-                btn.disabled = false;
-            });
-        });
-    </script>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-        import { initializeFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-        const firebaseConfig = { apiKey: "AIzaSyAdWnW_eamYoki_qYd3huavNh5baxOJIRA", authDomain: "luxurygoods26.firebaseapp.com", projectId: "luxurygoods26", storageBucket: "luxurygoods26.firebasestorage.app", messagingSenderId: "603153460354", appId: "1:603153460354:web:97534032034721a8d4989b" };
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = initializeFirestore(app, { experimentalForceLongPolling: true });
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                document.getElementById('menu-login').style.display = 'none';
-                document.getElementById('menu-logout').style.display = 'block';
-                try {
-                    const docRef = doc(db, "usuarios", user.uid);
-                    const docSnap = await getDoc(docRef);
-                    if (docSnap.exists() && docSnap.data().rol === "admin") { document.getElementById('menu-admin').style.display = 'block'; }
-                } catch (e) {}
-            }
-        });
-    </script>
 </body>
 </html>
