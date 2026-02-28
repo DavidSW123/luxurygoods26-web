@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gracias | Luxury Goods</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="marble-header">
+        <div class="logo-container">
+            <img src="logo-header.png" alt="Luxury Goods Logo" class="main-logo">
+            <img src="logo-header-2.png" alt="Curated Elegance" class="sub-logo">
+            <p class="tagline">Premium Apparel & Exclusive Footwear</p>
+        </div>
+        
+        <nav class="top-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="new-arrivals.html">New Arrivals</a></li>
+                <li><a href="contacto.html">Contact</a></li>
+                
+                <li id="menu-login"><a href="#" id="btn-open-login">Acceso</a></li>
+                <li id="menu-admin" style="display: none;"><a href="admin.html" class="admin-link">Panel Admin</a></li>
+                <li id="menu-logout" style="display: none;"><a href="#" id="btn-logout">Salir</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="white-section" style="min-height: 50vh;">
+        <div class="thank-you-container" style="text-align: center; max-width: 600px;">
+            <img src="crown-icon.png" alt="Corona" style="height: 40px; margin-bottom: 2rem;">
+            <h1 class="hero-title" style="font-size: 2.5rem; margin-bottom: 1rem;">Solicitud Recibida</h1>
+            <p class="hero-subtitle" style="font-size: 1.1rem; margin-bottom: 2rem;">
+                Le agradecemos su interés. Nuestro equipo Concierge está revisando su solicitud y se pondrá en contacto con usted a la mayor brevedad posible para ofrecerle un servicio a su medida.
+            </p>
+            
+            <p class="signature-text">Atentamente,<br>El equipo de Luxury Goods</p>
+            
+            <a href="index.html" class="btn-primary" style="display: inline-block; margin-top: 3rem;">Volver al Inicio</a>
+        </div>
+    </main>
+
+    <footer class="marble-footer">
+        <div class="footer-grid">
+            <div class="footer-col footer-links">
+                <h4>Colecciones</h4>
+                <ul>
+                    <li><a href="shop.html">Shop All</a></li>
+                    <li><a href="new-arrivals.html">Novedades</a></li>
+                    <li><a href="#">Ediciones Limitadas</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col footer-brand-center">
+                <img src="logo-header.png" alt="Luxury Goods Logo" class="footer-logo">
+                <p class="footer-tagline">Premium Apparel</p>
+            </div>
+            
+            <div class="footer-col footer-contact">
+                <h4>Atención</h4>
+                <ul>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="#">Envíos y Devoluciones</a></li>
+                    <li><a href="#">Guía de Tallas</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Luxury Goods. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { initializeFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        const firebaseConfig = { apiKey: "AIzaSyAdWnW_eamYoki_qYd3huavNh5baxOJIRA", authDomain: "luxurygoods26.firebaseapp.com", projectId: "luxurygoods26", storageBucket: "luxurygoods26.firebasestorage.app", messagingSenderId: "603153460354", appId: "1:603153460354:web:97534032034721a8d4989b" };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = initializeFirestore(app, { experimentalForceLongPolling: true });
+
+        const menuLogin = document.getElementById('menu-login'); const menuAdmin = document.getElementById('menu-admin'); const menuLogout = document.getElementById('menu-logout'); const btnLogout = document.getElementById('btn-logout');
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                menuLogin.style.display = 'none'; menuLogout.style.display = 'block';
+                try {
+                    const docRef = doc(db, "usuarios", user.uid); const docSnap = await getDoc(docRef);
+                    if (docSnap.exists() && docSnap.data().rol === "admin") { menuAdmin.style.display = 'block'; }
+                } catch (error) {}
+            } else { menuLogin.style.display = 'block'; menuAdmin.style.display = 'none'; menuLogout.style.display = 'none'; }
+        });
+
+        btnLogout.addEventListener('click', (e) => { e.preventDefault(); signOut(auth).then(() => { window.location.href="index.html"; }); });
+    </script>
+</body>
+</html>
