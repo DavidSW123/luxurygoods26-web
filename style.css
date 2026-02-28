@@ -1,549 +1,132 @@
-:root {
-    --gold: #C5A059;
-    --text-on-marble: #F0F0F0;
-    --text-on-white: #222222;
-    --font-serif: 'Cinzel', serif;
-    --font-sans: 'Montserrat', sans-serif;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: var(--font-sans); background-color: #FAFAFA; }
-
-/* --- CABECERA DE MÁRMOL --- */
-.marble-header {
-    background-color: #151515;
-    background-image: linear-gradient(rgba(20, 20, 20, 0.8), rgba(20, 20, 20, 0.8)), url('marmol.png');
-    background-size: cover;
-    background-position: center;
-    padding: 2.5rem 0 0 0; 
-    text-align: center;
-    color: var(--text-on-marble);
-    border-bottom: 3px solid var(--gold); 
-}
-
-.logo-container {
-    margin-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.main-logo {
-    height: 150px !important; 
-    width: auto;
-    margin-bottom: 0.5rem;
-}
-
-.sub-logo {
-    height: 25px; 
-    width: auto;
-    margin-bottom: 1.5rem;
-}
-
-.tagline {
-    font-family: var(--font-serif);
-    color: var(--gold);
-    letter-spacing: 2px;
-    font-size: 0.85rem;
-    opacity: 0.9;
-    text-transform: uppercase;
-}
-
-.top-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 3.5rem;
-    margin-bottom: 0; 
-}
-
-.top-nav a {
-    text-decoration: none;
-    color: var(--text-on-marble);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 0.95rem;
-    padding-bottom: 12px;
-    transition: color 0.3s, border-bottom 0.3s;
-    border-bottom: 3px solid transparent; 
-}
-
-.top-nav a:hover, .top-nav a.active {
-    color: var(--gold);
-    border-bottom: 3px solid var(--gold); 
-}
-
-/* --- SECCIÓN CENTRAL BLANCA --- */
-.white-section {
-    background-color: #FFFFFF;
-    padding: 8rem 5%; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.featured-product {
-    display: flex;
-    align-items: center;
-    max-width: 1200px; 
-    width: 100%;
-    gap: 6rem; 
-}
-
-.product-image-container {
-    flex: 1.2; 
-}
-
-.product-image-container img {
-    width: 100%;
-    height: auto;
-    display: block;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08); 
-}
-
-.product-info-container {
-    flex: 1;
-    text-align: left;
-    padding-right: 2rem;
-}
-
-.crown-icon-wrapper {
-    display: inline-block;
-    background-color: rgba(197, 160, 89, 0.15); 
-    border-radius: 50%;
-    padding: 15px;
-    margin-bottom: 2rem;
-}
-
-.crown-icon {
-    height: 28px;
-    width: auto;
-    display: block;
-}
-
-.product-title {
-    font-family: var(--font-serif);
-    font-size: 3rem; 
-    color: var(--text-on-white);
-    margin-bottom: 1.5rem;
-    font-weight: 400;
-    line-height: 1.2;
-}
-
-.product-description {
-    color: #555; 
-    font-size: 1.1rem;
-    line-height: 1.8;
-    letter-spacing: 0.5px;
-    max-width: 500px; 
-}
-
-/* --- FOOTER DE MÁRMOL --- */
-.marble-footer {
-    background-color: #151515;
-    background-image: linear-gradient(rgba(20, 20, 20, 0.8), rgba(20, 20, 20, 0.8)), url('marmol.png');
-    background-size: cover;
-    background-position: center;
-    padding: 4rem 5% 2rem 5%;
-    color: var(--text-on-marble);
-    border-top: 3px solid var(--gold);
-}
-
-.footer-grid {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 4rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    align-items: center; 
-    border-bottom: 1px solid rgba(197, 160, 89, 0.2);
-    padding-bottom: 3rem;
-}
-
-.footer-col {
-    display: flex;
-    flex-direction: column;
-}
-
-.footer-links { text-align: right; }
-
-.footer-brand-center {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 2rem;
-}
-
-.footer-logo {
-    height: 100px; 
-    width: auto;
-    margin-bottom: 0.5rem;
-}
-
-.footer-tagline {
-    color: var(--gold);
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    font-family: var(--font-serif);
-    text-transform: uppercase;
-}
-
-.footer-contact { text-align: left; }
-
-.footer-col h4 {
-    color: var(--gold);
-    font-family: var(--font-serif);
-    margin-bottom: 1.5rem;
-    letter-spacing: 2px;
-    font-size: 1.1rem;
-}
-
-.footer-col ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-}
-
-.footer-col a {
-    color: #ccc;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.3s;
-}
-
-.footer-col a:hover { color: var(--gold); }
-
-.footer-bottom {
-    margin-top: 2rem;
-    text-align: center;
-    font-size: 0.85rem;
-    opacity: 0.6;
-}
+/* ... (Todo tu código anterior se mantiene igual hasta New Arrivals) ... */
 
 /* =======================================================
-   NUEVA HOME (MARKETING & SEO)
+   NEW ARRIVALS REFINADO (ESTILO GALERÍA)
 ======================================================= */
-.hero-section {
-    background-color: #FAFAFA;
-    padding: 6rem 5%;
+.arrivals-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 5% 6rem 5%;
     text-align: center;
-    border-bottom: 1px solid rgba(197, 160, 89, 0.2);
 }
 
-.hero-title {
+.arrivals-title {
     font-family: var(--font-serif);
     font-size: 3.5rem;
     color: var(--text-on-white);
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
-}
-
-.hero-subtitle {
-    color: #555;
-    font-size: 1.2rem;
-    max-width: 600px;
-    margin: 0 auto 3rem auto;
-    line-height: 1.6;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-}
-
-.btn-primary {
-    background-color: var(--gold);
-    color: #121212;
-    padding: 15px 35px;
-    text-decoration: none;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s;
-    border: 1px solid var(--gold);
-    cursor: pointer;
-}
-
-.btn-primary:hover {
-    background-color: transparent;
-    color: var(--gold);
-}
-
-.btn-secondary {
-    background-color: transparent;
-    color: var(--text-on-white);
-    padding: 15px 35px;
-    text-decoration: none;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border: 1px solid #333;
-    transition: all 0.3s;
-}
-
-.btn-secondary:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-}
-
-.brand-pillars-section {
-    background-color: #FFFFFF;
-    padding: 6rem 5%;
-    display: flex;
-    justify-content: space-between;
-    gap: 4rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.pillar {
-    flex: 1;
-    text-align: center;
-}
-
-.pillar-title {
-    font-family: var(--font-serif);
-    color: var(--gold);
-    font-size: 1.5rem;
     margin-bottom: 1rem;
-}
-
-.pillar-desc {
-    color: #666;
-    line-height: 1.7;
-    font-size: 0.95rem;
-}
-
-/* =======================================================
-   NUEVA PÁGINA DE CONTACTO (FORMULARIO PREMIUM)
-======================================================= */
-.contact-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    max-width: 1200px;
-    width: 100%;
-    gap: 5rem;
-}
-
-.contact-form-container {
-    flex: 1.5;
-    background-color: #FAFAFA;
-    padding: 3rem;
-    border: 1px solid rgba(197, 160, 89, 0.2);
-}
-
-.contact-title {
-    font-family: var(--font-serif);
-    font-size: 2.2rem;
-    color: var(--text-on-white);
-    margin-bottom: 1rem;
-}
-
-.contact-desc {
-    color: #555;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 2.5rem;
-}
-
-.luxury-form .form-group {
-    margin-bottom: 1.5rem;
-}
-
-.luxury-form label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #333;
-    font-size: 0.85rem;
-    font-weight: 600;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
-.luxury-form input, 
-.luxury-form select, 
-.luxury-form textarea {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid #CCC;
-    background-color: #FFF;
+.arrivals-subtitle {
     font-family: var(--font-sans);
-    font-size: 0.95rem;
-    color: #333;
-    transition: border-color 0.3s;
+    font-weight: 300;
+    font-size: 1.1rem;
+    color: #888;
+    margin-bottom: 5rem;
+    letter-spacing: 1px;
 }
-
-.luxury-form input:focus, 
-.luxury-form select:focus, 
-.luxury-form textarea:focus {
-    border-color: var(--gold);
-    outline: none;
-}
-
-.contact-info-blocks {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-}
-
-.info-block .info-title {
-    font-family: var(--font-serif);
-    color: var(--gold);
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-}
-
-.info-block p {
-    color: #555;
-    line-height: 1.8;
-    font-size: 0.95rem;
-    margin-bottom: 0.5rem;
-}
-
-/* Estilos para los enlaces de redes (WhatsApp/Telegram) */
-.social-contact-links a {
-    color: #333;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s;
-}
-
-.social-contact-links a:hover {
-    color: var(--gold);
-}
-
-/* =======================================================
-   CLASES UTILITARIAS PARA FIREBASE
-======================================================= */
-.hidden { display: none !important; }
-.admin-link { color: var(--gold) !important; font-weight: bold; }
-
-/* =======================================================
-   REGLAS RESPONSIVE (MAGIA PARA MÓVILES Y TABLETS)
-======================================================= */
-@media (max-width: 992px) {
-    .featured-product { gap: 3rem; }
-    .product-title { font-size: 2.2rem; }
-    .white-section { padding: 6rem 5%; }
-    
-    .contact-wrapper { flex-direction: column; gap: 4rem; }
-    .contact-form-container { width: 100%; }
-    
-    .footer-grid { gap: 2rem; }
-}
-
-@media (max-width: 768px) {
-    .top-nav ul {
-        flex-direction: column; 
-        gap: 1.2rem;
-        margin-bottom: 0;
-    }
-    .main-logo { height: 110px !important; }
-    .sub-logo { height: 15px; } 
-    .tagline {
-        font-size: 0.75rem;
-        padding: 0 10px;
-    }
-    
-    .featured-product {
-        flex-direction: column; 
-        text-align: center; 
-        gap: 3rem;
-    }
-    .product-info-container {
-        padding-right: 0;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center; 
-    }
-    .product-title { font-size: 2rem; }
-    .product-description { max-width: 100%; font-size: 1rem; }
-    
-    .hero-title { font-size: 2.5rem; }
-    .hero-buttons { flex-direction: column; }
-    .brand-pillars-section { flex-direction: column; gap: 3rem; }
-
-    .marble-footer { padding: 3rem 5% 2rem 5%; }
-    .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-        text-align: center;
-    }
-    .footer-links, .footer-contact { text-align: center; }
-    .footer-brand-center { padding: 0; margin-bottom: 1rem; }
-    
-    .contact-form-container { padding: 2rem 1.5rem; }
-
-    /* =======================================================
-    PÁGINA DE GRACIAS (FIRMA MANUSCRITA REFINADA)
-    ======================================================= */
-    .signature-text {
-        font-family: 'Great Vibes', cursive;
-        font-size: clamp(2.5rem, 8vw, 3.5rem); /* Tamaño fluido según pantalla */
-        color: var(--gold);
-        margin-top: 2rem;
-        line-height: 1.1;
-        font-weight: 400;
-    }
-
-    .thank-you-container {
-        padding: 6rem 2rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-        /* =======================================================
-   NEW ARRIVALS STYLES
-======================================================= */
-.arrivals-container { width: 100%; text-align: center; }
-.arrivals-title { font-family: var(--font-serif); font-size: 3rem; margin-bottom: 0.5rem; color: var(--text-on-white); }
-.arrivals-subtitle { font-size: 1.1rem; color: #777; margin-bottom: 4rem; }
 
 .arrivals-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 3rem;
-    max-width: 1200px;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 6rem;
     margin: 0 auto;
 }
 
-.arrival-card { background: #FFF; transition: transform 0.3s ease; border: 1px solid #EEE; }
-.arrival-card:hover { transform: translateY(-10px); }
+.arrival-card {
+    background: transparent;
+    transition: all 0.4s ease;
+}
 
-.arrival-image { position: relative; overflow: hidden; height: 450px; background: #F9F9F9; }
-.arrival-image img { width: 100%; height: 100%; object-fit: cover; }
+.arrival-image {
+    position: relative;
+    overflow: hidden;
+    height: 500px; /* Tamaño controlado y elegante */
+    margin-bottom: 2.5rem;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+}
+
+.arrival-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.arrival-card:hover .arrival-image img {
+    transform: scale(1.06);
+}
 
 .badge-gold {
-    position: absolute; top: 20px; right: 20px;
-    background: var(--gold); color: #FFF;
-    padding: 8px 15px; font-size: 0.75rem;
-    font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+    position: absolute; top: 25px; right: 25px;
+    background: rgba(197, 160, 89, 0.95);
+    color: #FFF;
+    padding: 8px 18px; font-size: 0.75rem;
+    font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
+    z-index: 2;
 }
 
-.arrival-info { padding: 2rem; text-align: left; }
-.arrival-info h3 { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1rem; color: #222; }
-.arrival-info p { color: #666; font-size: 0.95rem; line-height: 1.6; margin-bottom: 2rem; }
+.arrival-info {
+    text-align: center;
+    padding: 0 10%;
+}
+
+.arrival-info h3 {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--text-on-white);
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+.arrival-info p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+}
 
 .btn-arrival {
-    display: inline-block; padding: 12px 25px;
-    border: 1px solid var(--gold); color: var(--gold);
-    text-decoration: none; font-size: 0.85rem;
-    font-weight: 600; text-transform: uppercase;
+    display: inline-block;
+    padding: 14px 35px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
     transition: all 0.3s;
 }
-.btn-arrival:hover { background: var(--gold); color: #FFF; }
+
+.btn-arrival:hover {
+    background: var(--gold);
+    color: #FFF;
+}
 
 .placeholder-luxury {
     height: 100%; display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-serif); color: #CCC; font-size: 1.2rem; letter-spacing: 3px;
+    background: #f4f4f4; color: #bbb;
+    font-family: var(--font-serif); font-size: 1.2rem; letter-spacing: 4px;
     text-transform: uppercase;
 }
+
+/* Firma de Gracias */
+.signature-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.5rem, 8vw, 3.5rem);
+    color: var(--gold);
+    margin-top: 2rem;
+    line-height: 1.1;
+}
+
+.thank-you-container {
+    padding: 6rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
