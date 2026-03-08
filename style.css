@@ -67,6 +67,76 @@ body { font-family: var(--font-sans); background-color: #FAFAFA; }
 }
 
 /* =======================================================
+   MENÚ DESPLEGABLE GLOBAL (LUJO GRIEGO)
+======================================================= */
+.top-nav ul li.nav-item-dropdown { 
+    position: relative; 
+}
+
+/* Flechita dorada que aparece al pasar el ratón */
+.dropdown-arrow {
+    font-size: 0.55rem;
+    color: var(--gold, #C5A059);
+    opacity: 0; 
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+    margin-left: 5px;
+}
+
+.top-nav ul li.nav-item-dropdown:hover .dropdown-arrow {
+    opacity: 1; 
+    transform: translateY(0);
+}
+
+/* La pastilla del menú super compacta */
+.dropdown-menu { 
+    position: absolute; 
+    top: 100%; 
+    left: 50%; 
+    transform: translateX(-50%) translateY(10px); 
+    background-color: #ffffff; 
+    border: 1px solid #C5A059; 
+    padding: 5px 0; /* MUY ajustado verticalmente */
+    min-width: 150px; 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08); 
+    opacity: 0; 
+    visibility: hidden; 
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
+    display: flex; 
+    flex-direction: column; 
+    z-index: 9999; 
+    list-style: none !important;
+}
+
+.top-nav ul li.nav-item-dropdown:hover .dropdown-menu { 
+    opacity: 1; 
+    visibility: visible; 
+    transform: translateX(-50%) translateY(0); 
+}
+
+.dropdown-menu li { 
+    width: 100%; 
+}
+
+.dropdown-menu li a { 
+    color: #333 !important; 
+    font-family: 'Cinzel', serif; 
+    font-size: 0.7rem; 
+    padding: 8px 15px; /* Altura mínima entre palabras para que no parezca una lista infinita */
+    display: block; 
+    text-align: center; 
+    letter-spacing: 2px; 
+    transition: 0.3s; 
+    text-decoration: none;
+    border-bottom: none !important; /* Quita el subrayado dorado de la cabecera general */
+}
+
+.dropdown-menu li a:hover { 
+    color: #C5A059 !important; 
+    background-color: #fafafa; 
+}
+
+/* =======================================================
    SECCIÓN CENTRAL BLANCA (BASE)
 ======================================================= */
 .white-section {
@@ -301,7 +371,7 @@ body { font-family: var(--font-sans); background-color: #FAFAFA; }
     
     /* 1. Cabecera más compacta y refinada */
     .marble-header { padding: 1.5rem 0 0 0; }
-    .main-logo { height: 75px !important; } /* Tamaño joya, elegante y no intrusivo */
+    .main-logo { height: 75px !important; } 
     .sub-logo { height: 12px; margin-bottom: 0.8rem; } 
     .tagline { font-size: 0.65rem; padding: 0 10px; letter-spacing: 1px; }
     
@@ -314,6 +384,10 @@ body { font-family: var(--font-sans); background-color: #FAFAFA; }
         margin-bottom: 0;
     }
     .top-nav a { font-size: 0.75rem; letter-spacing: 1px; padding-bottom: 4px; }
+
+    /* Ajuste para el desplegable en móvil */
+    .dropdown-menu { position: static; transform: none; box-shadow: none; border: none; background: transparent; padding: 0; min-width: auto; }
+    .top-nav ul li.nav-item-dropdown:hover .dropdown-menu { display: none; /* Mejor deshabilitar el hover en móvil para evitar clics accidentales */ }
 
     /* 3. Reducción drástica de los espacios en blanco gigantes */
     .white-section { padding: 3.5rem 5%; }
@@ -345,83 +419,14 @@ body { font-family: var(--font-sans); background-color: #FAFAFA; }
     .arrivals-title { font-size: 2.2rem; }
     .arrivals-subtitle { font-size: 0.95rem; margin-bottom: 3rem; line-height: 1.5; }
     .arrivals-grid { grid-template-columns: 1fr; gap: 4rem; }
-    .arrival-image { height: 350px; margin-bottom: 1.5rem; } /* Altura controlada para móvil */
+    .arrival-image { height: 350px; margin-bottom: 1.5rem; }
     .arrival-info { padding: 0 5%; }
     .arrival-info h3 { font-size: 1.5rem; }
 
     /* 8. Footer recogido */
     .marble-footer { padding: 3rem 5% 2rem 5%; }
     .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; border-bottom: none; padding-bottom: 1rem; }
-    .footer-brand-center { padding: 0; margin-bottom: 0; order: -1; } /* Sube el logo arriba del todo en móvil */
+    .footer-brand-center { padding: 0; margin-bottom: 0; order: -1; }
     .footer-logo { height: 75px; }
     .footer-links, .footer-contact { text-align: center; }
-}
-
-/* =========================================
-   MENÚ DESPLEGABLE GLOBAL (LUJO GRIEGO)
-   ========================================= */
-.top-nav ul li.nav-item-dropdown { 
-    position: relative; 
-}
-
-/* Flechita dorada que aparece al pasar el ratón */
-.dropdown-arrow {
-    font-size: 0.55rem;
-    color: var(--gold, #C5A059);
-    opacity: 0; 
-    transform: translateY(-5px);
-    transition: all 0.3s ease;
-    margin-left: 5px;
-}
-
-.top-nav ul li.nav-item-dropdown:hover .dropdown-arrow {
-    opacity: 1; 
-    transform: translateY(0);
-}
-
-/* La pastilla del menú */
-.dropdown-menu { 
-    position: absolute; 
-    top: 100%; 
-    left: 50%; 
-    transform: translateX(-50%) translateY(10px); 
-    background-color: #ffffff; 
-    border: 1px solid #C5A059; 
-    padding: 8px 0; /* Espaciado vertical reducido */
-    min-width: 150px; /* Caja más estrecha */
-    box-shadow: 0 15px 35px rgba(0,0,0,0.08); 
-    opacity: 0; 
-    visibility: hidden; 
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
-    display: flex; 
-    flex-direction: column; 
-    z-index: 9999; /* Por encima de todo */
-    list-style: none !important;
-}
-
-.top-nav ul li.nav-item-dropdown:hover .dropdown-menu { 
-    opacity: 1; 
-    visibility: visible; 
-    transform: translateX(-50%) translateY(0); 
-}
-
-.dropdown-menu li { 
-    width: 100%; 
-}
-
-.dropdown-menu li a { 
-    color: #333 !important; 
-    font-family: 'Cinzel', serif; 
-    font-size: 0.7rem; /* Letra más pequeña y premium */
-    padding: 10px 15px; /* Ajuste alrededor del texto */
-    display: block; 
-    text-align: center; 
-    letter-spacing: 2px; 
-    transition: 0.3s; 
-    text-decoration: none;
-}
-
-.dropdown-menu li a:hover { 
-    color: #C5A059 !important; 
-    background-color: #fafafa; 
 }
