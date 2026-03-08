@@ -8,17 +8,19 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Estilos específicos para la cuadrícula de la tienda */
-        .filter-btn { transition: all 0.3s ease; }
-        .filter-btn:hover, .filter-btn.active { background: #C5A059 !important; color: #111 !important; }
-        .product-card { background: #1a1a1a; border: 1px solid rgba(197, 160, 89, 0.2); transition: transform 0.3s, border-color 0.3s; color: white; display: flex; flex-direction: column; position: relative; overflow: hidden; }
-        .product-card:hover { transform: translateY(-8px); border-color: #C5A059; }
-        .product-image { width: 100%; height: 350px; object-fit: cover; border-bottom: 1px solid rgba(197, 160, 89, 0.2); }
-        .product-info { padding: 20px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .product-category { color: #C5A059; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
-        .product-name { font-family: 'Cinzel', serif; font-size: 1.2rem; margin: 0 0 10px 0; color: #f4f4f4; }
-        .product-price { font-weight: 600; font-size: 1.1rem; color: #fff; }
-        .placeholder-tag { position: absolute; top: 15px; right: 15px; background: rgba(10,10,10,0.9); color: #C5A059; padding: 6px 12px; font-size: 0.65rem; border: 1px solid #C5A059; letter-spacing: 1px; z-index: 10; }
+        /* Estilos incrustados para las tarjetas de producto y filtros */
+        .filters { display: flex; justify-content: center; gap: 15px; padding: 20px; flex-wrap: wrap; }
+        .filter-btn { background: transparent; border: 1px solid #C5A059; color: #C5A059; padding: 10px 25px; cursor: pointer; font-family: 'Cinzel', serif; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem;}
+        .filter-btn:hover, .filter-btn.active { background: #C5A059; color: #111; }
+        
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; padding: 20px; max-width: 1200px; margin: 0 auto; }
+        .product-card { background: #1a1a1a; border: 1px solid rgba(197, 160, 89, 0.2); transition: 0.3s; color: white; overflow: hidden; position: relative; }
+        .product-card:hover { transform: translateY(-5px); border-color: #C5A059; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .product-image { width: 100%; height: 350px; object-fit: cover; border-bottom: 1px solid rgba(197,160,89,0.2); }
+        .product-info { padding: 15px; text-align: center; }
+        .product-category { color: #C5A059; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 1px;}
+        .product-name { font-family: 'Cinzel', serif; font-size: 1.2rem; margin: 5px 0 10px 0; }
+        .product-price { font-weight: 600; font-size: 1.1rem; }
     </style>
 </head>
 <body>
@@ -44,19 +46,17 @@
         </nav>
     </header>
 
-    <main class="white-section" style="min-height: 60vh; padding: 40px 20px; background-color: #0a0a0a;">
-        
-        <div class="filters" style="display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap;">
-            <button class="filter-btn active" onclick="filterProducts('all')" style="background: #C5A059; border: 1px solid #C5A059; color: #111; padding: 10px 25px; cursor: pointer; font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 1px;">Colección Completa</button>
-            <button class="filter-btn" onclick="filterProducts('Camisetas')" style="background: transparent; border: 1px solid #C5A059; color: #C5A059; padding: 10px 25px; cursor: pointer; font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 1px;">Camisetas</button>
-            <button class="filter-btn" onclick="filterProducts('Zapatillas')" style="background: transparent; border: 1px solid #C5A059; color: #C5A059; padding: 10px 25px; cursor: pointer; font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 1px;">Sneakers</button>
-            <button class="filter-btn" onclick="filterProducts('Accesorios')" style="background: transparent; border: 1px solid #C5A059; color: #C5A059; padding: 10px 25px; cursor: pointer; font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 1px;">Accesorios</button>
+    <main style="min-height: 60vh; background-color: #0a0a0a; padding-bottom: 50px;">
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterProducts('all')">Todo</button>
+            <button class="filter-btn" onclick="filterProducts('Camisetas')">Camisetas</button>
+            <button class="filter-btn" onclick="filterProducts('Zapatillas')">Zapatillas</button>
+            <button class="filter-btn" onclick="filterProducts('Accesorios')">Accesorios</button>
         </div>
 
-        <section class="products-grid" id="grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto;">
-            <p style="text-align:center; grid-column: 1/-1; color: #C5A059; font-family: 'Cinzel', serif; font-size: 1.2rem;">Cargando catálogo exclusivo...</p>
+        <section class="products-grid" id="grid">
+            <p style="text-align:center; grid-column: 1/-1; color: #C5A059;">Cargando catálogo exclusivo...</p>
         </section>
-
     </main>
 
     <footer class="marble-footer">
@@ -112,11 +112,9 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-        
-        // ¡NUEVO!: Añadimos los imports para leer la colección "productos"
         import { initializeFirestore, doc, getDoc, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-        // Tu configuración real intacta
+        // TU CONFIGURACIÓN DE FIREBASE
         const firebaseConfig = {
             apiKey: "AIzaSyAdWnW_eamYoki_qYd3huavNh5baxOJIRA",
             authDomain: "luxurygoods26.firebaseapp.com",
@@ -131,7 +129,7 @@
         const googleProvider = new GoogleAuthProvider();
         const db = initializeFirestore(app, { experimentalForceLongPolling: true });
 
-        // --- SISTEMA DE LOGIN Y ROLES (Tuyo, sin tocar) ---
+        // LÓGICA DE USUARIOS Y ROLES (Intacta)
         const menuLogin = document.getElementById('menu-login');
         const menuAdmin = document.getElementById('menu-admin');
         const menuLogout = document.getElementById('menu-logout');
@@ -190,13 +188,12 @@
             signOut(auth).then(() => { window.location.reload(); });
         });
 
-        // --- SISTEMA NUEVO: CONEXIÓN AL PANEL ADMIN ---
+        // NUEVA LÓGICA: CARGA DEL INVENTARIO DESDE FIRESTORE
         let allProducts = [];
 
         async function loadShopData() {
             const grid = document.getElementById('grid');
             try {
-                // Llama a la colección "productos" (la misma donde guarda admin.html)
                 const q = query(collection(db, "productos"), orderBy("fecha", "desc"));
                 const querySnapshot = await getDocs(q);
                 
@@ -207,8 +204,8 @@
 
                 renderProducts(allProducts);
             } catch (error) {
-                console.error("Error cargando el catálogo:", error);
-                grid.innerHTML = "<p style='grid-column: 1/-1; text-align:center; color:#ff4444;'>Error de conexión con la base de datos.</p>";
+                console.error("Error cargando productos:", error);
+                grid.innerHTML = "<p style='color:red; text-align:center; grid-column:1/-1;'>No se pudo cargar el catálogo.</p>";
             }
         }
 
@@ -217,7 +214,7 @@
             grid.innerHTML = ""; 
 
             if (products.length === 0) {
-                grid.innerHTML = "<p style='grid-column: 1/-1; text-align:center; color:#888; font-style:italic;'>Catálogo vacío. Añade productos desde el Panel Admin.</p>";
+                grid.innerHTML = "<p style='grid-column:1/-1; text-align:center; color:#888;'>Próximamente nueva colección...</p>";
                 return;
             }
 
@@ -225,11 +222,10 @@
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 
-                // Si la imagen real no existe por el bloqueo de Google Cloud, generamos la imagen oscura elegante
+                // Placeholder elegante por si no hay foto
                 const imgSrc = p.imagenPrincipal || `https://via.placeholder.com/400x500/1a1a1a/C5A059?text=${encodeURIComponent(p.nombre)}`;
 
                 card.innerHTML = `
-                    ${(!p.imagenes || p.imagenes.length === 0) ? '<div class="placeholder-tag">PRE-ORDER</div>' : ''}
                     <img src="${imgSrc}" class="product-image" alt="${p.nombre}">
                     <div class="product-info">
                         <div class="product-category">${p.categoria}</div>
@@ -241,27 +237,19 @@
             });
         }
 
-        // Función para los botones de filtrado
         window.filterProducts = (cat) => {
-            // Cambiar estilos de los botones activos
             document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.style.background = "transparent";
-                btn.style.color = "#C5A059";
-                if(btn.textContent.toLowerCase() === cat.toLowerCase() || (cat === 'all' && btn.textContent === 'Colección Completa')) {
-                    btn.style.background = "#C5A059";
-                    btn.style.color = "#111";
+                btn.classList.remove('active');
+                if(btn.textContent.toLowerCase() === cat.toLowerCase() || (cat === 'all' && btn.textContent === 'Todo')) {
+                    btn.classList.add('active');
                 }
             });
 
-            // Mostrar filtrado
-            if(cat === 'all') {
-                renderProducts(allProducts);
-            } else {
-                renderProducts(allProducts.filter(p => p.categoria.toLowerCase() === cat.toLowerCase()));
-            }
+            if(cat === 'all') renderProducts(allProducts);
+            else renderProducts(allProducts.filter(p => p.categoria === cat));
         };
 
-        // Arrancar la carga del catálogo al entrar
+        // Iniciar la magia al entrar a la tienda
         loadShopData();
     </script>
 </body>
