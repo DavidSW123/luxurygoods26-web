@@ -8,23 +8,30 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Estilos incrustados para las tarjetas luminosas y filtros */
-        .filters { display: flex; justify-content: center; gap: 15px; padding: 40px 20px 20px; flex-wrap: wrap; }
-        .filter-btn { background: transparent; border: 1px solid #C5A059; color: #333; padding: 10px 25px; cursor: pointer; font-family: 'Cinzel', serif; transition: 0.3s; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; font-weight: 600;}
-        .filter-btn:hover, .filter-btn.active { background: #C5A059; color: #fff; }
-        
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px; padding: 20px 20px 60px; max-width: 1200px; margin: 0 auto; }
-        
-        /* Tarjetas estilo boutique (fondo blanco, texto oscuro) */
+        /* === ESTILOS DEL DROPDOWN DEL MENÚ === */
+        .top-nav ul li { position: relative; }
+        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #0a0a0a; border: 1px solid rgba(197, 160, 89, 0.3); padding: 10px 0; min-width: 180px; z-index: 100; box-shadow: 0 5px 15px rgba(0,0,0,0.5); list-style: none !important; flex-direction: column !important; }
+        .top-nav li:hover .dropdown-menu { display: flex; }
+        .dropdown-menu li { margin: 0; padding: 0; }
+        .dropdown-menu li a { display: block; padding: 10px 20px; font-size: 0.8rem; text-transform: uppercase; color: #f4f4f4; }
+        .dropdown-menu li a:hover { color: #C5A059; background: #1a1a1a; }
+
+        /* === ESTILOS DE LA BARRA DE FILTROS === */
+        .controls-bar { max-width: 1200px; margin: 0 auto; padding: 40px 20px 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eaeaea; flex-wrap: wrap; gap: 20px; }
+        .control-group { display: flex; align-items: center; gap: 15px; }
+        .control-group label { font-family: 'Cinzel', serif; font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+        .luxury-select { padding: 8px 15px; border: 1px solid #ddd; background: #fff; font-family: 'Montserrat', sans-serif; font-size: 0.9rem; color: #333; outline: none; cursor: pointer; transition: 0.3s; }
+        .luxury-select:hover { border-color: #C5A059; }
+
+        /* === ESTILOS DE LAS TARJETAS === */
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px; padding: 40px 20px 60px; max-width: 1200px; margin: 0 auto; }
         .product-card { background: #fff; border: 1px solid #eaeaea; transition: 0.4s ease; overflow: hidden; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column; }
         .product-card:hover { transform: translateY(-8px); border-color: #C5A059; box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
         .product-image { width: 100%; height: 380px; object-fit: cover; border-bottom: 1px solid #eaeaea; }
-        
         .product-info { padding: 20px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
         .product-category { color: #C5A059; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1.5px; font-weight: 600; }
         .product-name { font-family: 'Cinzel', serif; font-size: 1.2rem; margin: 5px 0 10px 0; color: #111; }
         .product-price { font-weight: 600; font-size: 1.1rem; color: #444; }
-        
         .placeholder-tag { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.9); color: #C5A059; padding: 6px 12px; font-size: 0.65rem; border: 1px solid #C5A059; letter-spacing: 1px; z-index: 10; font-weight: bold; }
     </style>
 </head>
@@ -38,9 +45,16 @@
         </div>
         
         <nav class="top-nav">
-            <ul>
+            <ul style="display: flex; gap: 20px; align-items: center; list-style: none;">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="shop.html" class="active">Shop</a></li>
+                <li>
+                    <a href="shop.html" class="active">Shop</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="shop.html?cat=camisetas">Camisetas</a></li>
+                        <li><a href="shop.html?cat=zapatillas">Zapatillas</a></li>
+                        <li><a href="shop.html?cat=accesorios">Accesorios</a></li>
+                    </ul>
+                </li>
                 <li><a href="new-arrivals.html">New Arrivals</a></li>
                 <li><a href="contacto.html">Contact</a></li>
                 
@@ -52,11 +66,28 @@
     </header>
 
     <main class="white-section" style="min-height: 60vh;">
-        <div class="filters">
-            <button class="filter-btn active" onclick="filterProducts('all')">Todo</button>
-            <button class="filter-btn" onclick="filterProducts('Camisetas')">Camisetas</button>
-            <button class="filter-btn" onclick="filterProducts('Zapatillas')">Zapatillas</button>
-            <button class="filter-btn" onclick="filterProducts('Accesorios')">Accesorios</button>
+        
+        <div class="controls-bar">
+            <div class="control-group">
+                <label for="category-select">Categoría:</label>
+                <select id="category-select" class="luxury-select" onchange="applyFiltersAndSort()">
+                    <option value="all">Todas las colecciones</option>
+                    <option value="camisetas">Camisetas</option>
+                    <option value="zapatillas">Zapatillas</option>
+                    <option value="accesorios">Accesorios</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="sort-select">Ordenar por:</label>
+                <select id="sort-select" class="luxury-select" onchange="applyFiltersAndSort()">
+                    <option value="newest">Novedades</option>
+                    <option value="oldest">Más antiguos</option>
+                    <option value="price-asc">Precio: Menor a Mayor</option>
+                    <option value="price-desc">Precio: Mayor a Menor</option>
+                    <option value="rating">Mejor valorados</option>
+                </select>
+            </div>
         </div>
 
         <section class="products-grid" id="grid">
@@ -74,12 +105,10 @@
                     <li><a href="#">Ediciones Limitadas</a></li>
                 </ul>
             </div>
-            
             <div class="footer-col footer-brand-center">
                 <img src="logo-header.png" alt="Luxury Goods Logo" class="footer-logo">
                 <p class="footer-tagline">Premium Apparel</p>
             </div>
-            
             <div class="footer-col footer-contact">
                 <h4>Atención</h4>
                 <ul>
@@ -97,19 +126,14 @@
     <div id="login-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:1000; display:none; justify-content:center; align-items:center;">
         <div style="background:#1E1E1E; padding:35px; border-radius:8px; border:1px solid rgba(197, 160, 89, 0.3); text-align:center; max-width: 400px; width: 90%; font-family:'Montserrat', sans-serif;">
             <h2 style="color:#C5A059; font-family:'Cinzel', serif; margin-bottom: 25px;">Acceso Exclusivo</h2>
-            
             <button id="btn-google" style="background:white; color:black; padding:12px 20px; border:none; border-radius:4px; cursor:pointer; width:100%; margin-bottom:20px; font-family:'Montserrat', sans-serif; font-weight:600; display:flex; align-items:center; justify-content:center; gap:10px;">
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" style="width:18px;" alt="Google">
                 Continuar con Google
             </button>
-            
             <p style="margin-bottom:20px; font-size:0.85rem; color:#888; text-transform:uppercase; letter-spacing:1px;">O con tu email</p>
-            
             <input type="email" id="login-email" placeholder="Correo electrónico" style="width:100%; padding:12px; margin-bottom:12px; background:#2A2A2A; color:white; border:1px solid #444; border-radius:4px; box-sizing:border-box; font-family:'Montserrat', sans-serif;">
             <input type="password" id="login-pass" placeholder="Contraseña" style="width:100%; padding:12px; margin-bottom:25px; background:#2A2A2A; color:white; border:1px solid #444; border-radius:4px; box-sizing:border-box; font-family:'Montserrat', sans-serif;">
-            
             <button id="btn-email-login" style="background:transparent; color:#C5A059; padding:12px 20px; border:1px solid #C5A059; cursor:pointer; width:100%; transition:all 0.3s; font-family:'Montserrat', sans-serif; font-weight:600; text-transform:uppercase;">Iniciar Sesión</button>
-            
             <p id="btn-close-modal" style="margin-top:25px; color:#666; cursor:pointer; font-size:0.9rem; transition:color 0.3s;">Cerrar</p>
         </div>
     </div>
@@ -117,9 +141,9 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-        import { initializeFirestore, doc, getDoc, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        import { initializeFirestore, doc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-        // TU CONFIGURACIÓN DE FIREBASE INTACTA
+        // FIREBASE CONFIG
         const firebaseConfig = {
             apiKey: "AIzaSyAdWnW_eamYoki_qYd3huavNh5baxOJIRA",
             authDomain: "luxurygoods26.firebaseapp.com",
@@ -134,7 +158,7 @@
         const googleProvider = new GoogleAuthProvider();
         const db = initializeFirestore(app, { experimentalForceLongPolling: true });
 
-        // LÓGICA DE USUARIOS Y ROLES
+        // AUTH LÓGICA
         const menuLogin = document.getElementById('menu-login');
         const menuAdmin = document.getElementById('menu-admin');
         const menuLogout = document.getElementById('menu-logout');
@@ -154,12 +178,9 @@
                 try {
                     const docRef = doc(db, "usuarios", user.uid);
                     const docSnap = await getDoc(docRef);
-                    if (docSnap.exists() && docSnap.data().rol === "admin") {
-                        menuAdmin.style.display = 'block';
-                    } else {
-                        menuAdmin.style.display = 'none';
-                    }
-                } catch (error) { console.error("Error al comprobar rol:", error); }
+                    if (docSnap.exists() && docSnap.data().rol === "admin") menuAdmin.style.display = 'block';
+                    else menuAdmin.style.display = 'none';
+                } catch (error) { console.error("Error rol:", error); }
             } else {
                 menuLogin.style.display = 'block';
                 menuAdmin.style.display = 'none';
@@ -167,67 +188,77 @@
             }
         });
 
-        document.getElementById('btn-email-login').addEventListener('click', () => {
-            const email = document.getElementById('login-email').value;
-            const pass = document.getElementById('login-pass').value;
-            if(!email || !pass) return alert("Por favor, rellena ambos campos.");
-            signInWithEmailAndPassword(auth, email, pass).then(() => {
-                loginModal.style.display = 'none';
-                document.getElementById('login-email').value = "";
-                document.getElementById('login-pass').value = "";
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }).catch((error) => alert("Error: Verifica tu correo o contraseña."));
-        });
-
-        document.getElementById('btn-google').addEventListener('click', () => {
-            signInWithPopup(auth, googleProvider).then(() => {
-                loginModal.style.display = 'none';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }).catch((error) => {
-                if (error.code !== 'auth/popup-closed-by-user') { alert("Error al conectar con Google."); }
-            });
-        });
-
-        btnLogout.addEventListener('click', (e) => {
-            e.preventDefault();
-            signOut(auth).then(() => { window.location.reload(); });
-        });
-
-        // LÓGICA DE CARGA DE PRODUCTOS
+        // LÓGICA DE LA TIENDA Y ORDENACIÓN
         let allProducts = [];
 
         async function loadShopData() {
             const grid = document.getElementById('grid');
             try {
-                const q = query(collection(db, "productos"), orderBy("fecha", "desc"));
-                const querySnapshot = await getDocs(q);
-                
+                // Traemos todos los productos (sin ordenar aquí, lo haremos en JS)
+                const querySnapshot = await getDocs(collection(db, "productos"));
                 allProducts = [];
                 querySnapshot.forEach((doc) => {
                     allProducts.push({ id: doc.id, ...doc.data() });
                 });
 
-                renderProducts(allProducts);
+                // Leemos si la URL tiene categoría (ej. shop.html?cat=camisetas)
+                const urlParams = new URLSearchParams(window.location.search);
+                const urlCategory = urlParams.get('cat');
+                
+                if(urlCategory) {
+                    document.getElementById('category-select').value = urlCategory.toLowerCase();
+                }
+
+                // Aplicamos los filtros y pintamos
+                applyFiltersAndSort();
+
             } catch (error) {
                 console.error("Error cargando productos:", error);
                 grid.innerHTML = "<p style='color:#333; text-align:center; grid-column:1/-1;'>No se pudo cargar el catálogo.</p>";
             }
         }
 
+        // Función Maestra: Filtra y Ordena
+        window.applyFiltersAndSort = () => {
+            const selectedCat = document.getElementById('category-select').value;
+            const sortMethod = document.getElementById('sort-select').value;
+
+            // 1. Filtrar
+            let result = [...allProducts];
+            if (selectedCat !== 'all') {
+                // Trim y lowercase para evitar errores de escritura en el admin
+                result = result.filter(p => p.categoria && p.categoria.trim().toLowerCase() === selectedCat);
+            }
+
+            // 2. Ordenar
+            result.sort((a, b) => {
+                if (sortMethod === 'price-asc') return Number(a.precio) - Number(b.precio);
+                if (sortMethod === 'price-desc') return Number(b.precio) - Number(a.precio);
+                
+                // Extraer tiempos (timestamp de Firebase o fecha local)
+                let timeA = a.fecha?.seconds || 0;
+                let timeB = b.fecha?.seconds || 0;
+                
+                if (sortMethod === 'newest' || sortMethod === 'rating') return timeB - timeA;
+                if (sortMethod === 'oldest') return timeA - timeB;
+                return 0;
+            });
+
+            renderProducts(result);
+        };
+
         function renderProducts(products) {
             const grid = document.getElementById('grid');
             grid.innerHTML = ""; 
 
             if (products.length === 0) {
-                grid.innerHTML = "<p style='grid-column:1/-1; text-align:center; color:#666;'>El catálogo se actualizará próximamente.</p>";
+                grid.innerHTML = "<p style='grid-column:1/-1; text-align:center; color:#666;'>No hay productos en esta categoría.</p>";
                 return;
             }
 
             products.forEach(p => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
-                
-                // Placeholder clarito para fondo blanco
                 const imgSrc = p.imagenPrincipal || `https://via.placeholder.com/400x500/f4f4f4/C5A059?text=${encodeURIComponent(p.nombre)}`;
 
                 card.innerHTML = `
@@ -243,19 +274,6 @@
             });
         }
 
-        window.filterProducts = (cat) => {
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if(btn.textContent.toLowerCase() === cat.toLowerCase() || (cat === 'all' && btn.textContent === 'Todo')) {
-                    btn.classList.add('active');
-                }
-            });
-
-            if(cat === 'all') renderProducts(allProducts);
-            else renderProducts(allProducts.filter(p => p.categoria === cat));
-        };
-
-        // Iniciar carga
         loadShopData();
     </script>
 </body>
