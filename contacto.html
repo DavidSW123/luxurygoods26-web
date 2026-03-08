@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <header class="marble-header">
+<header class="marble-header">
         <div class="logo-container">
             <img src="logo-header.png" alt="Luxury Goods Logo" class="main-logo">
             <img src="logo-header-2.png" alt="Curated Elegance" class="sub-logo">
@@ -19,7 +19,17 @@
         <nav class="top-nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
+                
+                <li class="nav-item-dropdown">
+                    <a href="shop.html" style="display: flex; align-items: center; justify-content: center; gap: 4px;">
+                        Shop <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="shop.html?cat=camisetas">Camisetas</a></li>
+                        <li><a href="shop.html?cat=zapatillas">Zapatillas</a></li>
+                        <li><a href="shop.html?cat=accesorios">Accesorios</a></li>
+                    </ul>
+                </li>
                 <li><a href="new-arrivals.html">New Arrivals</a></li>
                 <li><a href="contacto.html" class="active">Contact</a></li>
                 <li id="menu-login"><a href="#" id="btn-open-login">Acceso</a></li>
