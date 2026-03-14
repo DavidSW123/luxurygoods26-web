@@ -1,3 +1,26 @@
+¡Ahí está el problema, claro y meridiano!
+
+Fíjate entre las líneas 13 y 20 de lo que me acabas de pasar. Tienes literalmente esto:
+
+```html
+    <header class="marble-header">
+        <div class="logo-container">
+            ...
+        </div>
+        
+<header class="marble-header">
+        <div class="logo-container">
+            ...
+        </div>
+        <nav class="top-nav">
+
+```
+
+Has abierto un `<header>`, le has metido los logos, y justo después **has abierto otro `<header>` nuevo** con los logos y el menú. Por eso te salía duplicado.
+
+Aquí tienes tu archivo `index.html` completamente limpio y arreglado. Solo hay **un** header, con el menú desplegable elegante y los logos en su sitio. Cópialo entero y pégalo sustituyendo el tuyo:
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,13 +34,6 @@
 <body>
 
     <header class="marble-header">
-        <div class="logo-container">
-            <img src="logo-header.png" alt="Luxury Goods Logo" class="main-logo">
-            <img src="logo-header-2.png" alt="Curated Elegance" class="sub-logo">
-            <p class="tagline">Premium Apparel & Exclusive Footwear</p>
-        </div>
-        
-<header class="marble-header">
         <div class="logo-container">
             <img src="logo-header.png" alt="Luxury Goods Logo" class="main-logo">
             <img src="logo-header-2.png" alt="Curated Elegance" class="sub-logo">
@@ -204,3 +220,5 @@
     </script>
 </body>
 </html>
+
+```
